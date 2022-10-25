@@ -1,0 +1,117 @@
+/* General setup */
+
+* {
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+body {
+    margin: 0;
+    font-family: arial;
+    overflow: hidden;
+}
+
+input {
+    border: none;
+}
+
+/* Guesses page */
+
+.header {
+    position: absolute;
+    margin-top: 0;
+    height: 50px;
+    width: 100%;
+    background-color: blue;
+}
+
+.content {
+    position: absolute;
+    margin-top: 60px;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.table-match {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.table-match, .td-match {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.col-team {
+    width: 30%;
+}
+
+.col-goals {
+    width: 10%;
+}
+
+.col-versus {
+    width: 10%;
+}
+
+.col-id {
+    background-color: black;
+    color: white;
+}
+
+.col-datetime {
+    background-color: gray;
+    color: white;
+}
+
+.col-score {
+    background-color: gray;
+    color: white;
+}
+
+.col-real-result {
+    background-color: gray;
+    color: white;
+}
+
+.tr-match-info, .tr-match-result {
+    width: 100%;
+}
+
+.table-options {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.button-option:hover {
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+}
+
+.button-option:active {
+    background-color: white;
+    color: black;
+    cursor: auto;
+}
+
+/* Ranking page */
+
+.table-ranking {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    text-align: center;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.table-ranking, .td-ranking {
+    border: 1px solid black;
+    border-collapse: collapse;
+}

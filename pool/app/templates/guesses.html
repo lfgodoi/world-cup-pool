@@ -1,0 +1,76 @@
+{% extends "template.html" %}
+{% block content %}
+
+    <!-- Page header -->
+    <div class="header">
+        <table class="table-options">
+            <tr>
+                <td>
+                    <form action="/login" method="get">
+                        <input class="button-option" type="submit" value="Sair">
+                    </form>
+                </td>
+                <td>
+                    <form action="/save" method="get">
+                        <input class="button-option" type="submit" value="Salvar palpites">
+                    </form>
+                </td>
+                <td>
+                    <form action="/ranking" method="get">
+                        <input class="button-option" type="submit" value="Ranking">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Result area-->
+    <div class="content">
+        {% for match in matches %}
+        <table class="table-match">
+            <tr class="tr-match-info">
+                <td class="td-match col-id" colspan="1">Jogo {{ match["id"] }}</td>
+                <td class="td-match col-datetime" colspan="4">{{ match["datetime"] }}</td>
+            </tr>
+            <tr class="tr-match-result">
+                <td class="td-match col-team">{{ match["team_1"] }}</td>
+                {% if guesses[match["id"]][0] is none %}
+                    <td class="td-match col-goals"><input type="number" min=0 max=20></td>
+                {% else %}
+                    <td class="td-match col-goals"><input type="number" min=0 max=20 value={{ guesses[match["id"]][0] }}></td>
+                {% endif %}
+                <td class="td-match col-versus">x</td>
+                {% if guesses[match["id"]][1] is none %}
+                    <td class="td-match col-goals"><input type="number" min=0 max=20></td>
+                {% else %}
+                    <td class="td-match col-goals"><input type="number" min=0 max=20 value={{ guesses[match["id"]][1] }}></td>
+                {% endif %}
+                <td class="td-match col-team">{{ match["team_2"] }}</td>
+            </tr>
+            <tr>
+                {% if match["goals_1"] == none %}
+                    <td class="td-match col-real-result" colspan="3">Ainda não jogado</td>
+                {% else %}
+                    <td class="td-match col-real-result" colspan="3">Resultado real: {{ match["goals_1"] }} x {{ match["goals_2"] }}</td>
+                {% endif %}
+                {% if match["goals_1"] != none and match["goals_2"] != none and guesses[match["id"]][0] != none and guesses[match["id"]][1] != none %}
+                    {% if match["goals_1"] == guesses[match["id"]][0] and match["goals_2"] == guesses[match["id"]][1] %}
+                        <td class="td-match col-score" colspan="2">Pontos: 5</td>
+                    {% elif match["goals_1"] > match["goals_2"] and guesses[match["id"]][0] > guesses[match["id"]][1] %}
+                        <td class="td-match col-score" colspan="2">Pontos: 3</td>
+                    {% elif match["goals_1"] < match["goals_2"] and guesses[match["id"]][0] < guesses[match["id"]][1] %}
+                        <td class="td-match col-score" colspan="2">Pontos: 3</td>
+                        {% elif match["goals_1"] == match["goals_2"] and guesses[match["id"]][0] == guesses[match["id"]][1] %}
+                        <td class="td-match col-score" colspan="2">Pontos: 3</td>
+                    {% else %}
+                        <td class="td-match col-score" colspan="2">Pontos: 0</td>
+                    {% endif %}
+                {% else %}
+                    <td class="td-match col-score" colspan="2">Pontos: 0</td>
+                {% endif %}
+            </tr>
+        </table>
+        {% endfor %}
+    </div>
+
+{% endblock %}
