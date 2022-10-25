@@ -14,6 +14,7 @@ app.config['SECRET_KEY'] = 'mYkEy'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 # Endpoint - Rendering the guess page
+@app.route("/")
 @app.route("/guesses")
 def guesses():
     db_access = DBAccess()
