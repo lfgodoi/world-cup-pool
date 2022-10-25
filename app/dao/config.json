@@ -1,7 +1,7 @@
 {
-    "host": "ec2-44-198-82-71.compute-1.amazonaws.com",
-    "database": "d47iro5tn1td48",
-    "user": "wxrilktwrcqymi",
-    "password": "6b81aedc715c0acc90701f7b0ea34e87230ea11fd6a917dc98c65b73d6353226",
+    "host": "ec2-52-23-131-232.compute-1.amazonaws.com",
+    "database": "damm5gdtj9at7c",
+    "user": "uzmgaayyyzjsbe",
+    "password": "b973e22c5a3ec261283b957235e08dd617efd23d8d6bfc112354c9b1bdf48d40",
     "port": 5432
 }
