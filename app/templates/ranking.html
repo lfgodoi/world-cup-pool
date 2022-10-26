@@ -29,14 +29,18 @@
     <!-- Result area-->
     <div class="content">
         <table class="table-match">
-            <tr>
-                <td><h3>Posição</h3></td>
-                <td><h3>Nome</h3></td>
-                <td><h3>Usuário</h3></td>
-                <td><h3>Pontos</h3></td>
+            <tr class="tr-header">
+                <td><h4>Posição</h4></td>
+                <td><h4>Nome</h4></td>
+                <td><h4>Usuário</h4></td>
+                <td><h4>Pontos</h4></td>
             </tr>
             {% for user in users %}
-                <tr>
+                {% if loop.index %2 == 0 %}
+                    <tr class="tr-even">
+                {% else %}
+                    <tr class="tr-odd">
+                {% endif %}
                     <td class="td-ranking">{{ user["position"] }}</td>
                     <td class="td-ranking">{{ user["name"] }}</td>
                     <td class="td-ranking">{{ user["username"] }}</td>

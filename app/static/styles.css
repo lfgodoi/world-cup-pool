@@ -22,6 +22,7 @@ input {
     height: 50px;
     width: 100%;
     background-color: #953133;
+    display: flex;
 }
 
 .content {
@@ -105,7 +106,7 @@ input {
 .button-option {
     border-radius: 10px;
     height: 20px;
-    width: 120px;
+    width: 85px;
 }
 
 .button-option:hover {
@@ -180,4 +181,32 @@ input {
     background-color: white;
     color: black;
     cursor: auto;
+}
+
+.tr-header {
+    background-color: gray;
+    color: white;
+}
+
+.tr-odd {
+    background-color: white;
+}
+
+.tr-even {
+    background-color: #e7e4e0;
+}
+
+/* Management page */
+
+.table-users {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.td-button {
+    border: none;
+    text-align: left;
 }
