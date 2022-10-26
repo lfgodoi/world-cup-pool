@@ -15,6 +15,13 @@
                         <input class="button-option" type="submit" value="Palpites">
                     </form>
                 </td>
+                {% if admin_access %}
+                    <td>
+                        <form action="/management" method="get">
+                            <input class="button-option" type="submit" value="Gerenciar">
+                        </form>
+                    </td>
+                {% endif %}
             </tr>
         </table>
     </div>
@@ -25,14 +32,14 @@
             <tr>
                 <td><h3>Posição</h3></td>
                 <td><h3>Nome</h3></td>
-                <td><h3>CPF</h3></td>
+                <td><h3>Usuário</h3></td>
                 <td><h3>Pontos</h3></td>
             </tr>
             {% for user in users %}
                 <tr>
                     <td class="td-ranking">{{ user["position"] }}</td>
                     <td class="td-ranking">{{ user["name"] }}</td>
-                    <td class="td-ranking">{{ user["cpf"] }}</td>
+                    <td class="td-ranking">{{ user["username"] }}</td>
                     <td class="td-ranking">{{ user["score"] }}</td>
                 </tr>
             {% endfor %}

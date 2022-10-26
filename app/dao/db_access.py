@@ -58,10 +58,10 @@ class DBAccess:
     # Lendo os palpites de um jogador
     def get_guesses(self):
         cursor = self.connect()
-        cursor.execute(f"""
-                        SELECT guesses FROM users
-                        WHERE cpf = '42431892859'
-                        """)                
+        cursor.execute("""
+                       SELECT guesses FROM users
+                       WHERE username = 'lfgodoi'
+                       """)                
         result = cursor.fetchone()[0]
         guesses = {
             i + 1: [2, 5] 
@@ -69,12 +69,33 @@ class DBAccess:
         }
         return guesses
 
-    # Lendo os dados dos jogadores
-    def get_users(self):
+    # Lendo os dados dos jogadores para gerenciamento
+    def get_users_management(self):
         cursor = self.connect()
-        cursor.execute(f"""
-                        SELECT name, cpf, score FROM users
-                        ORDER BY score DESC
+        cursor.execute("""
+                    SELECT name, username, score, password, admin_access FROM users
+                    ORDER BY score DESC
+                        """)              
+        results = cursor.fetchall()
+        users = []
+        for result in results:
+            user = {
+                "name": result[0],
+                "username": result[1],
+                "score": result[2],
+                "password": result[3],
+                "admin_access": result[4]
+            }  
+            if user["admin_access"] == False:
+                users.append(user)
+        return users
+
+    # Lendo os dados dos jogadores para ranking
+    def get_users_ranking(self):
+        cursor = self.connect() 
+        cursor.execute("""
+                    SELECT name, username, score FROM users
+                    ORDER BY score DESC
                         """)                
         results = cursor.fetchall()
         users = []
@@ -82,10 +103,26 @@ class DBAccess:
         for result in results:
             user = {
                 "name": result[0],
-                "cpf": result[1][:-6] + '******',
+                "username": result[1],
                 "score": result[2],
                 "position": counter
             }
             users.append(user)
             counter += 1
         return users
+
+    # Lendo os dados de um jogador
+    def get_user(self, username):
+        cursor = self.connect()
+        cursor.execute(f"""
+                        SELECT name, username, password, admin_access FROM users
+                        WHERE username = username
+                        """)                
+        result = cursor.fetchone()
+        user = {
+            "name": result[0],
+            "username": result[1],
+            "password": result[2],
+            "admin_access": result[3]
+        }
+        return user

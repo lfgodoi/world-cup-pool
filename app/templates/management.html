@@ -1,0 +1,52 @@
+{% extends "template.html" %}
+{% block content %}
+
+    <!-- Page header -->
+    <div class="header">
+        <table class="table-options">
+            <tr>
+                <td>
+                    <form action="/login" method="get">
+                        <input class="button-option" type="submit" value="Sair">
+                    </form>
+                </td>
+                <td>
+                    <form action="/guesses" method="get">
+                        <input class="button-option" type="submit" value="Palpites">
+                    </form>
+                </td>
+                <td>
+                    <form action="/ranking" method="get">
+                        <input class="button-option" type="submit" value="Ranking">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Result area-->
+    <div class="content">
+        <table class="table-match">
+            <tr>
+                <td><h3>Nome</h3></td>
+                <td><h3>Usuário</h3></td>
+                <td><h3>Senha</h3></td>
+            </tr>
+            <tr>
+                <td class="td-ranking"><input type="text" id="input-add-name"></td>
+                <td class="td-ranking"><input type="text" id="input-add-username"></td>
+                <td class="td-ranking"><input type="text" id="input-add-password"></td>
+                <td class="td-ranking"><input type="button" id="button-add-user" value="Adicionar"></td>
+            </tr>            
+            {% for user in users %}
+                <tr>
+                    <td class="td-ranking" id="td-name-{{ user['name'] }}">{{ user["name"] }}</td>
+                    <td class="td-ranking" id="td-username-{{ user['username'] }}">{{ user["username"] }}</td>
+                    <td class="td-ranking" id="td-password-{{ user['password'] }}">{{ user["password"] }}</td>
+                    <td class="td-ranking"><input type="button" id="button-remove-{{ user['username'] }}" value="Excluir"></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}

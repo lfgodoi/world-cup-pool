@@ -20,6 +20,13 @@
                         <input class="button-option" type="submit" value="Ranking">
                     </form>
                 </td>
+                {% if admin_access %}
+                    <td>
+                        <form action="/management" method="get">
+                            <input class="button-option" type="submit" value="Gerenciar">
+                        </form>
+                    </td>
+                {% endif %}
             </tr>
         </table>
     </div>
