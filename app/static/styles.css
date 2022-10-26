@@ -2,7 +2,6 @@
 
 * {
     box-sizing: border-box;
-    font-size: 12px;
 }
 
 body {
@@ -22,7 +21,7 @@ input {
     margin-top: 0;
     height: 50px;
     width: 100%;
-    background-color: blue;
+    background-color: #953133;
 }
 
 .content {
@@ -42,7 +41,7 @@ input {
 }
 
 .table-match, .td-match {
-    border: 1px solid black;
+    border: 1px solid #953133;
     border-collapse: collapse;
 }
 
@@ -59,33 +58,53 @@ input {
 }
 
 .col-id {
-    background-color: black;
+    background-color: #953133;
     color: white;
 }
 
 .col-datetime {
-    background-color: gray;
-    color: white;
+    background-color: #e7e4e0;
+    color: black;
 }
 
 .col-score {
-    background-color: gray;
-    color: white;
+    background-color: #e7e4e0;
+    color: black;
 }
 
 .col-real-result {
-    background-color: gray;
-    color: white;
+    background-color: #e7e4e0;
+    color: black;
 }
 
 .tr-match-info, .tr-match-result {
     width: 100%;
 }
 
+.tr-match-info {
+    height: 25px;
+}
+
+.tr-match-result {
+    height: 40px;
+    font-size: 18px;
+}
+
+.input-goals {
+    font-size: 18px;
+    text-align: center;
+}
+
 .table-options {
     width: 100%;
     height: 100%;
     text-align: center;
+}
+
+.button-option {
+    border-radius: 10px;
+    height: 20px;
+    width: 120px;
 }
 
 .button-option:hover {
@@ -114,4 +133,44 @@ input {
 .table-ranking, .td-ranking {
     border: 1px solid black;
     border-collapse: collapse;
+}
+
+/* Login page */
+
+.div-login {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.input-login {
+    height: 30px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.button-login {
+    height: 40px;
+    border-radius: 20px;
+    width: 60px;
+}
+
+.image-login {
+    width: 50%;
+}
+
+.button-login:hover {
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+}
+
+.button-login:active {
+    background-color: white;
+    color: black;
+    cursor: auto;
 }
