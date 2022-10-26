@@ -12,11 +12,11 @@ $(document).ready(function() {
                      "password": password },
             success: function(data) {
                 var userTable = document.querySelector("#table-users");
-                userTable.innerHTML += `<tr>\
+                userTable.innerHTML += `<tr id='tr-user-${username}'>\
                                             <td class='td-ranking' id='td-name-${name}'>${name}</td>\
                                             <td class='td-ranking' id='td-username-${username}'>${username}</td>\
                                             <td class='td-ranking' id='td-password-${password}'>${password}</td>\
-                                            <td class='td-ranking'><input type='button' class='button-delete-user' id='button-delete-${username}' value='Excluir'></td>\
+                                            <td class='td-ranking'><input type='button' class='button-delete-user' id='button-delete-${username}' value='Excluir' onclick='deleteUser(this)'></td>\
                                         </tr>`
                 alert("Jogador adicionado com sucesso!");
             },  
@@ -30,20 +30,25 @@ $(document).ready(function() {
 // Removendo um usuário
 $(document).ready(function() {
     $(".button-delete-user").on("click", function(event) {
-        var elementId = event.target.id;
-        var username = parseInt(elementId.split("button-delete-").pop());
-        $.ajax({
-            url : "/deleteuser",
-            type : "POST",
-            data : { "username": username },
-            success: function(data) {
-                var userRow = document.querySelector("#tr-user-" + username);
-                userRow.parentNode.removeChild(userRow)
-                alert("Jogador removido com sucesso!");
-            },  
-            error: function() {
-                alert("Erro ao remover jogador!");
-            }
-        })
+        deleteUser(event.target);
     })
 })
+
+// Função de remoção de usuário
+function deleteUser(target) {
+    var elementId = target.id;
+    var username = elementId.split("button-delete-").pop();
+    $.ajax({
+        url : "/deleteuser",
+        type : "POST",
+        data : { "username": username },
+        success: function(data) {
+            var userRow = document.querySelector("#tr-user-" + username);
+            userRow.parentNode.removeChild(userRow)
+            alert("Jogador removido com sucesso!");
+        },  
+        error: function() {
+            alert("Erro ao remover jogador!");
+        }
+    })
+}

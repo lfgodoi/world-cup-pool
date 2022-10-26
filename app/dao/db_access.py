@@ -1,7 +1,6 @@
 # Importando pacotes e módulos
 import psycopg2
 import json
-import datetime
 
 # Lendo o arquivo de parâmetros
 with open("./dao/config.json", "rb") as file:
@@ -147,6 +146,6 @@ class DBAccess:
         cursor.execute("""
                        DELETE FROM users
                        WHERE username = %s
-                       """, (username))                
+                       """, (username,))                
         self.disconnect()
-        
+    
