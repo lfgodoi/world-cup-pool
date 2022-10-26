@@ -1,17 +1,49 @@
-// Updating the simulated results
+// Adicionando um usuário
 $(document).ready(function() {
-    var audio = $("#audio");
-    audio.trigger("play");
-    $("#button-run").on("click", function() {
-        request = $.ajax({
-            url : "/run",
+    $("#button-add-user").on("click", function() {
+        var name = $("#input-add-name").val();
+        var username = $("#input-add-username").val();
+        var password = $("#input-add-password").val();
+        $.ajax({
+            url : "/adduser",
             type : "POST",
-            data : {}
-        });
-        request.done(function(data) {
-            $("#div-group-stage").html(data.content_group_stage);
-            $("#div-knockout").html(data.content_knockout);
-        });
-    });
-});
+            data : { "name": name,
+                     "username": username,
+                     "password": password },
+            success: function(data) {
+                var userTable = document.querySelector("#table-users");
+                userTable.innerHTML += `<tr>\
+                                            <td class='td-ranking' id='td-name-${name}'>${name}</td>\
+                                            <td class='td-ranking' id='td-username-${username}'>${username}</td>\
+                                            <td class='td-ranking' id='td-password-${password}'>${password}</td>\
+                                            <td class='td-ranking'><input type='button' class='button-delete-user' id='button-delete-${username}' value='Excluir'></td>\
+                                        </tr>`
+                alert("Jogador adicionado com sucesso!");
+            },  
+            error: function() {
+                alert("Erro ao adicionar jogador! Verifique já não existe um jogador com o mesmo usuário.");
+            }
+        })
+    })
+})
 
+// Removendo um usuário
+$(document).ready(function() {
+    $(".button-delete-user").on("click", function(event) {
+        var elementId = event.target.id;
+        var username = parseInt(elementId.split("button-delete-").pop());
+        $.ajax({
+            url : "/deleteuser",
+            type : "POST",
+            data : { "username": username },
+            success: function(data) {
+                var userRow = document.querySelector("#tr-user-" + username);
+                userRow.parentNode.removeChild(userRow)
+                alert("Jogador removido com sucesso!");
+            },  
+            error: function() {
+                alert("Erro ao remover jogador!");
+            }
+        })
+    })
+})

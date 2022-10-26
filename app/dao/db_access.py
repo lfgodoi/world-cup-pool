@@ -42,6 +42,7 @@ class DBAccess:
                         SELECT id, datetime, team_1, goals_1, team_2, goals_2 FROM matches
                         """)                
         results = cursor.fetchall()
+        self.disconnect()
         matches = []
         for result in results:
             match = {
@@ -63,6 +64,7 @@ class DBAccess:
                        WHERE username = 'lfgodoi'
                        """)                
         result = cursor.fetchone()[0]
+        self.disconnect()
         guesses = {
             i + 1: [2, 5] 
             for i in range(48)
@@ -77,6 +79,7 @@ class DBAccess:
                     ORDER BY score DESC
                         """)              
         results = cursor.fetchall()
+        self.disconnect()
         users = []
         for result in results:
             user = {
@@ -98,6 +101,7 @@ class DBAccess:
                     ORDER BY score DESC
                         """)                
         results = cursor.fetchall()
+        self.disconnect()
         users = []
         counter = 1
         for result in results:
@@ -119,6 +123,7 @@ class DBAccess:
                         WHERE username = username
                         """)                
         result = cursor.fetchone()
+        self.disconnect()
         user = {
             "name": result[0],
             "username": result[1],
@@ -126,3 +131,22 @@ class DBAccess:
             "admin_access": result[3]
         }
         return user
+
+    # Adicionando um jogador
+    def add_user(self, name, username, password):
+        cursor = self.connect()
+        cursor.execute("""
+                       INSERT INTO users (username, password, name, admin_access, payment_status, score)
+                       VALUES (%s, %s, %s, %s, %s, %s)
+                       """, (username, password, name, False, True, 0))                
+        self.disconnect()
+
+    # Removendo um jogador
+    def delete_user(self, username):
+        cursor = self.connect()
+        cursor.execute("""
+                       DELETE FROM users
+                       WHERE username = %s
+                       """, (username))                
+        self.disconnect()
+        

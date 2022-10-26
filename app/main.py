@@ -5,7 +5,8 @@ from flask import (
     session,
     redirect,
     url_for,
-    request
+    request,
+    jsonify
 )
 import json
 import os
@@ -80,6 +81,36 @@ def authenticate():
 def logout():
     session["active_user"] = None
     return redirect(url_for("routes_login.login"))
+
+# Adding a new user
+@app.route("/adduser", methods=["POST",])
+def add_user():
+    try:
+        name = request.form["name"]
+        username = request.form["username"]
+        password = request.form["password"]
+        db_access = DBAccess()
+        db_access.add_user(name, username, password)
+        message = "Usuário adicionado com sucesso!"
+        status_code = 200
+    except:
+        message = "Não foi possível adicionar o usuário!"
+        status_code = 400
+    return jsonify({"message" : message}), status_code
+
+# Deleting a user
+@app.route("/deleteuser", methods=["POST",])
+def delete_user():
+    try:
+        username = request.form["username"]
+        db_access = DBAccess()
+        db_access.delete_user(username)
+        message = "Usuário removido com sucesso!"
+        status_code = 200
+    except:
+        message = "Não foi possível remover o usuário!"
+        status_code = 400
+    return jsonify({"message" : message}), status_code
 
 # Running the app
 if __name__ == "__main__":

@@ -24,9 +24,9 @@
         </table>
     </div>
 
-    <!-- Result area-->
+    <!-- User list area-->
     <div class="content">
-        <table class="table-match">
+        <table class="table-users" id="table-users">
             <tr>
                 <td><h3>Nome</h3></td>
                 <td><h3>Usuário</h3></td>
@@ -39,11 +39,11 @@
                 <td class="td-ranking"><input type="button" id="button-add-user" value="Adicionar"></td>
             </tr>            
             {% for user in users %}
-                <tr>
+                <tr id="tr-user-{{ user['username'] }}">
                     <td class="td-ranking" id="td-name-{{ user['name'] }}">{{ user["name"] }}</td>
                     <td class="td-ranking" id="td-username-{{ user['username'] }}">{{ user["username"] }}</td>
                     <td class="td-ranking" id="td-password-{{ user['password'] }}">{{ user["password"] }}</td>
-                    <td class="td-ranking"><input type="button" id="button-remove-{{ user['username'] }}" value="Excluir"></td>
+                    <td class="td-ranking"><input type="button" class="button-delete-user" id="button-delete-{{ user['username'] }}" value="Excluir"></td>
                 </tr>
             {% endfor %}
         </table>
