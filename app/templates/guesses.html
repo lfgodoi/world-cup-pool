@@ -39,13 +39,13 @@
             </tr>
             <tr class="tr-match-result">
                 <td class="td-match col-team">{{ match["team_1"] }}</td>
-                {% if guesses[match["id"]][0] is none %}
+                {% if guesses is none %}
                     <td class="td-match col-goals"><input class="input-goals goals-1" type="number" min=0 max=20></td>
                 {% else %}
                     <td class="td-match col-goals"><input class="input-goals goals-1" type="number" min=0 max=20 value={{ guesses[match["id"]][0] }}></td>
                 {% endif %}
                 <td class="td-match col-versus">x</td>
-                {% if guesses[match["id"]][1] is none %}
+                {% if guesses is none %}
                     <td class="td-match col-goals"><input class="input-goals goals-2" type="number" min=0 max=20></td>
                 {% else %}
                     <td class="td-match col-goals"><input class="input-goals goals-2" type="number" min=0 max=20 value={{ guesses[match["id"]][1] }}></td>
