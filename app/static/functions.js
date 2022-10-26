@@ -52,3 +52,29 @@ function deleteUser(target) {
         }
     })
 }
+
+// Salvando os palpites de um jogador
+$(document).ready(function() {
+    $("#button-save-guesses").on("click", function() {
+        var guesses = {};
+        var matches = document.querySelectorAll(".table-match");
+        for (let i = 0; i < matches.length; ++i) {
+            guesses[i + 1] = [parseInt(matches[i].querySelector(".goals-1").value),
+                              parseInt(matches[i].querySelector(".goals-2").value),
+                              0];
+        }
+        $.ajax({
+            url : "/saveguesses",
+            contentType: "application/json;charset=utf-8",
+            type: 'POST',
+            data: JSON.stringify({guesses}),
+            dataType: "json",
+            success: function(data) {
+                alert("Palpites salvos com sucesso!");
+            },  
+            error: function() {
+                alert("Erro ao salvar palpites! Verifique os campos preenchidos.");
+            }
+        })
+    })
+})

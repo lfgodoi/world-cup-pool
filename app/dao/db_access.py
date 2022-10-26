@@ -6,10 +6,10 @@ import json
 with open("./dao/config.json", "rb") as file:
     config = json.load(file)
 
-# Classe de acesso ao banco
+# Database access class
 class DBAccess:
 
-    # Parâmetros de conexão
+    # Connection parameters
     def __init__(self):
         self.host = config["host"]
         self.database = config["database"]
@@ -17,7 +17,7 @@ class DBAccess:
         self.password = config["password"]
         self.port = config["port"]
 
-    # Conectando-se ao banco
+    # Connnecting to the database
     def connect(self):
         self.conn = psycopg2.connect(
             host=self.host,
@@ -29,12 +29,12 @@ class DBAccess:
         cursor = self.conn.cursor()
         return cursor
 
-    # Desconectando-se do banco
+    # Disconnecting from the database
     def disconnect(self):
         self.conn.commit()
         self.conn.close()
 
-    # Lendo as partidas
+    # Reading every match
     def get_matches(self):
         cursor = self.connect()
         cursor.execute(f"""
@@ -55,22 +55,19 @@ class DBAccess:
             matches.append(match)
         return matches
 
-    # Lendo os palpites de um jogador
-    def get_guesses(self):
+    # Reading guesses from a player
+    def get_guesses(self, username):
         cursor = self.connect()
         cursor.execute("""
                        SELECT guesses FROM users
-                       WHERE username = 'lfgodoi'
-                       """)                
+                       WHERE username = %s
+                       """, (username,))                
         result = cursor.fetchone()[0]
+        guesses = {int(k): v for k, v in result.items()}
         self.disconnect()
-        guesses = {
-            i + 1: [2, 5] 
-            for i in range(48)
-        }
         return guesses
 
-    # Lendo os dados dos jogadores para gerenciamento
+   # Reading data from every player for building the user list
     def get_users_management(self):
         cursor = self.connect()
         cursor.execute("""
@@ -92,7 +89,7 @@ class DBAccess:
                 users.append(user)
         return users
 
-    # Lendo os dados dos jogadores para ranking
+    # Reading data from every player for building the ranking
     def get_users_ranking(self):
         cursor = self.connect() 
         cursor.execute("""
@@ -114,13 +111,13 @@ class DBAccess:
             counter += 1
         return users
 
-    # Lendo os dados de um jogador
+    # Reding data from a player
     def get_user(self, username):
         cursor = self.connect()
-        cursor.execute(f"""
-                        SELECT name, username, password, admin_access FROM users
-                        WHERE username = username
-                        """)                
+        cursor.execute("""
+                       SELECT name, username, password, admin_access FROM users
+                       WHERE username = %s
+                       """, (username,))                
         result = cursor.fetchone()
         self.disconnect()
         user = {
@@ -131,7 +128,7 @@ class DBAccess:
         }
         return user
 
-    # Adicionando um jogador
+    # Adding a player
     def add_user(self, name, username, password):
         cursor = self.connect()
         cursor.execute("""
@@ -140,7 +137,7 @@ class DBAccess:
                        """, (username, password, name, False, True, 0))                
         self.disconnect()
 
-    # Removendo um jogador
+    # Deleting a player
     def delete_user(self, username):
         cursor = self.connect()
         cursor.execute("""
@@ -149,3 +146,11 @@ class DBAccess:
                        """, (username,))                
         self.disconnect()
     
+    # Saving guesses of a player
+    def save_guesses(self, username, guesses):
+        cursor = self.connect()
+        cursor.execute("""
+                       UPDATE users SET guesses = %s
+                       WHERE username = %s
+                       """, (json.dumps(guesses), username))                
+        self.disconnect()
