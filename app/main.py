@@ -55,8 +55,10 @@ def management():
     elif session["admin_access"]:
         db_access = DBAccess()
         users = db_access.get_users_management()
+        matches = db_access.get_matches()
         return render_template("management.html", 
-                               users=users)
+                               users=users,
+                               matches=matches)
 
 # Login page
 @app.route("/")

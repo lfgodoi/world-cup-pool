@@ -24,30 +24,66 @@
         </table>
     </div>
 
-    <!-- User list area-->
+    <!-- Management area-->
     <div class="content">
-        <table class="table-users" id="table-users">
-            <tr class="tr-header">
-                <td><h4>Nome</h4></td>
-                <td><h4>Usuário</h4></td>
-                <td><h4>Senha</h4></td>
-                <td><h4>Ação</h4></td>
-            </tr>
-            <tr>
-                <td class="td-ranking"><input type="text" class="input-user" id="input-add-name"></td>
-                <td class="td-ranking"><input type="text" class="input-user" id="input-add-username"></td>
-                <td class="td-ranking"><input type="text" class="input-user" id="input-add-password"></td>
-                <td class="td-ranking"><input type="button" class="button-user" id="button-add-user" value="Adicionar" onclick="addUser()"></td>
-            </tr>            
-            {% for user in users %}
-                <tr id="tr-user-{{ user['username'] }}">
-                    <td class="td-ranking" id="td-name-{{ user['name'] }}">{{ user["name"] }}</td>
-                    <td class="td-ranking" id="td-username-{{ user['username'] }}">{{ user["username"] }}</td>
-                    <td class="td-ranking" id="td-password-{{ user['password'] }}">{{ user["password"] }}</td>
-                    <td class="td-ranking"><input type="button" class="button-user" id="button-delete-{{ user['username'] }}" value="Excluir" onclick="deleteUser(this)"></td>
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'users')">Usuários</button>
+            <button class="tablinks" onclick="openTab(event, 'results')">Resultados</button>
+          </div>
+          
+          <!-- User list tab -->
+          <div id="tab-users" class="tabcontent">
+            <table class="table-users" id="table-users">
+                <tr class="tr-header">
+                    <td><h4>Nome</h4></td>
+                    <td><h4>Usuário</h4></td>
+                    <td><h4>Senha</h4></td>
+                    <td><h4>Ação</h4></td>
                 </tr>
-            {% endfor %}
-        </table>
+                <tr>
+                    <td class="td-ranking"><input type="text" class="input-user" id="input-add-name"></td>
+                    <td class="td-ranking"><input type="text" class="input-user" id="input-add-username"></td>
+                    <td class="td-ranking"><input type="text" class="input-user" id="input-add-password"></td>
+                    <td class="td-ranking"><input type="button" class="button-user" id="button-add-user" value="Adicionar" onclick="addUser()"></td>
+                </tr>            
+                {% for user in users %}
+                    <tr id="tr-user-{{ user['username'] }}">
+                        <td class="td-ranking" id="td-name-{{ user['name'] }}">{{ user["name"] }}</td>
+                        <td class="td-ranking" id="td-username-{{ user['username'] }}">{{ user["username"] }}</td>
+                        <td class="td-ranking" id="td-password-{{ user['password'] }}">{{ user["password"] }}</td>
+                        <td class="td-ranking"><input type="button" class="button-user" id="button-delete-{{ user['username'] }}" value="Excluir" onclick="deleteUser(this)"></td>
+                    </tr>
+                {% endfor %}
+            </table>
+          </div>
+          
+          <!-- Match results tab -->
+          <div id="tab-results" class="tabcontent">
+            {% for match in matches %}
+            <table class="table-match" id="table-match-{{ match['id'] }}">
+                <tr class="tr-match-info">
+                    <td class="td-match col-id" colspan="1">Jogo {{ match["id"] }}</td>
+                    <td class="td-match col-datetime" colspan="4">{{ match["datetime"] }}</td>
+                </tr>
+                <tr class="tr-match-result">
+                    <td class="td-match col-team">{{ match["team_1"] }}</td>
+                    {% if match["goals_1"] != none %}
+                        <td class="td-match col-goals"><input class="input-goals goals-1" type="number" min=0 max=20 value={{ match['goals_1'] }}></td>
+                    {% else %}
+                        <td class="td-match col-goals"><input class="input-goals goals-1" type="number" min=0 max=20></td>
+                    {% endif %}
+                    <td class="td-match col-versus">x</td>
+                    {% if match["goals_2"] != none %}
+                        <td class="td-match col-goals"><input class="input-goals goals-2" type="number" min=0 max=20 value={{ match['goals_2'] }}></td>
+                    {% else %}
+                        <td class="td-match col-goals"><input class="input-goals goals-2" type="number" min=0 max=20></td>
+                    {% endif %}
+                    <td class="td-match col-team">{{ match["team_2"] }}</td>
+                    <td rowspan="2"><input type="button" class="button-confirm" value="Confirmar"></td>
+                </tr>
+            </table>
+        {% endfor %}
+          </div>
     </div>
 
 {% endblock %}
