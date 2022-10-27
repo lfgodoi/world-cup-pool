@@ -70,6 +70,7 @@ def login():
 @app.route("/authenticate", methods=["POST",])
 def authenticate():
     db_access = DBAccess()
+    print(request.form)
     user = db_access.get_user(request.form["username"])
     if request.form["password"] == user["password"]:
         session["active_user"] = user["username"]
