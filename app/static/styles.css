@@ -31,6 +31,7 @@ input {
     height: 100%;
     width: 100%;
     overflow: auto;
+    padding-bottom: 150px;
 }
 
 .table-match {
@@ -48,6 +49,8 @@ input {
 
 .col-team {
     width: 30%;
+    background-color: #e7e4e0;
+    color: black;
 }
 
 .col-goals {
@@ -56,6 +59,8 @@ input {
 
 .col-versus {
     width: 10%;
+    background-color: #e7e4e0;
+    color: black;
 }
 
 .col-id {
@@ -94,6 +99,8 @@ input {
 .input-goals {
     font-size: 18px;
     text-align: center;
+    font-weight: bold;
+    padding-left: 15px;
 }
 
 
