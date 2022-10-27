@@ -144,6 +144,24 @@ def save_guesses():
         status_code = 400
     return jsonify({"message" : message}), status_code
 
+# Updating a match result
+@app.route("/updatematch", methods=["POST",])
+def update_match():
+    try:
+        match_id = int(request.form["match_id"])
+        goals_1 = int(request.form["goals_1"])
+        goals_2 = int(request.form["goals_2"])
+        db_access = DBAccess()
+        db_access.update_match(match_id, goals_1, goals_2)
+        db_access.update_scores(match_id, goals_1, goals_2)
+        db_access.sum_scores()
+        message = "Usuário removido com sucesso!"
+        status_code = 200
+    except:
+        message = "Não foi possível remover o usuário!"
+        status_code = 400
+    return jsonify({"message" : message}), status_code
+
 # Running the app
 if __name__ == "__main__":
     port = os.environ.get("PORT", 5000)

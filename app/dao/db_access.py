@@ -1,4 +1,5 @@
 # Importando pacotes e módulos
+from nis import match
 import psycopg2
 import json
 
@@ -39,6 +40,7 @@ class DBAccess:
         cursor = self.connect()
         cursor.execute(f"""
                         SELECT id, datetime, team_1, goals_1, team_2, goals_2 FROM matches
+                        ORDER BY id
                         """)                
         results = cursor.fetchall()
         self.disconnect()
@@ -50,7 +52,7 @@ class DBAccess:
                 "team_1": result[2],
                 "goals_1": result[3],
                 "team_2": result[4],
-                "goals_2": result[3],
+                "goals_2": result[5]
             }
             matches.append(match)
         return matches
@@ -165,4 +167,64 @@ class DBAccess:
                        UPDATE users SET password = %s, name = %s
                        WHERE username = %s
                        """, (password, name, username))                
+        self.disconnect()
+
+    # Updating a match result
+    def update_match(self, match_id, goals_1, goals_2):
+        cursor = self.connect()
+        cursor.execute("""
+                       UPDATE matches SET goals_1 = %s, goals_2 = %s
+                       WHERE id = %s
+                       """, (goals_1, goals_2, match_id))                
+        self.disconnect()
+
+    # Updating score of a specific match for every user
+    def update_scores(self, match_id, goals_1, goals_2):
+        cursor = self.connect()
+        cursor.execute("""
+                       SELECT id, guesses FROM users
+                       """)
+        results = cursor.fetchall()
+        for result in results:
+            user_id = result[0]
+            guesses = result[1]
+            if guesses is not None:
+                guesses = {int(k): v for k, v in guesses.items()}
+                if guesses[match_id][0] == goals_1 and guesses[match_id][1] == goals_2:
+                    guesses[match_id][2] = 5
+                elif guesses[match_id][0] > guesses[match_id][1] and goals_1 > goals_2:
+                    guesses[match_id][2] = 3
+                elif guesses[match_id][0] < guesses[match_id][1] and goals_1 < goals_2:
+                    guesses[match_id][2] = 3
+                elif guesses[match_id][0] == guesses[match_id][1] and goals_1 == goals_2:
+                    guesses[match_id][2] = 3
+                else:
+                    guesses[match_id][2] = 0
+                cursor.execute("""
+                            UPDATE users SET guesses = %s
+                            WHERE id = %s
+                            """, (json.dumps(guesses), user_id))                          
+        self.disconnect()
+
+    # Updating the total score of every user
+    def sum_scores(self):
+        cursor = self.connect()
+        cursor.execute("""
+                       SELECT id, guesses FROM users
+                       """)
+        results = cursor.fetchall()  
+        for result in results:
+            user_id = result[0]
+            guesses = result[1]
+            if guesses is None:
+                total_score = 0
+            else:
+                guesses = {int(k): v for k, v in guesses.items()}
+                total_score = 0
+                for match_id in guesses.keys():
+                    total_score += guesses[match_id][2]
+            cursor.execute("""
+                        UPDATE users SET score = %s
+                        WHERE id = %s
+                        """, (total_score, user_id))          
         self.disconnect()

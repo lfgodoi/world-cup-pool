@@ -104,4 +104,25 @@ function openTab(evt, tabName) {
     }
     document.getElementById("tab-" + tabName).style.display = "block";
     evt.currentTarget.className += " active";
-  }
+}
+
+// Função de atualização de resultado
+function updateMatch(target) {
+    var elementId = target.id;
+    var matchId = elementId.split("button-confirm-").pop();
+    var goals1 = document.querySelector("#input-goals1-" + matchId).value;
+    var goals2 = document.querySelector("#input-goals2-" + matchId).value;
+    $.ajax({
+        url : "/updatematch",
+        type : "POST",
+        data : { "match_id": matchId,
+                 "goals_1": goals1,
+                 "goals_2": goals2 },
+        success: function(data) {
+            alert("Resultado atualizado com sucesso!");
+        },  
+        error: function() {
+            alert("Erro ao atualizar resultado!");
+        }
+    })
+}
