@@ -48,9 +48,10 @@
                 </tr>            
                 {% for user in users %}
                     <tr id="tr-user-{{ user['username'] }}">
-                        <td class="td-ranking" id="td-name-{{ user['name'] }}">{{ user["name"] }}</td>
-                        <td class="td-ranking" id="td-username-{{ user['username'] }}">{{ user["username"] }}</td>
-                        <td class="td-ranking" id="td-password-{{ user['password'] }}">{{ user["password"] }}</td>
+                        <td class="td-ranking" id="td-name-{{ user['name'] }}"><input type="text" value="{{ user['name'] }}" class="input-user" id="input-name-{{ user['username'] }}"></td>
+                        <td class="td-ranking td-username" id="td-username-{{ user['username'] }}">{{ user["username"] }}</td>
+                        <td class="td-ranking" id="td-password-{{ user['password'] }}"><input type="text" value="{{ user['password'] }}" class="input-user" id="input-password-{{ user['username'] }}"></td>
+                        <td class="td-ranking"><input type="button" class="button-user" id="button-update-{{ user['username'] }}" value="Atualizar" onclick="updateUser(this)"></td>
                         <td class="td-ranking"><input type="button" class="button-user" id="button-delete-{{ user['username'] }}" value="Excluir" onclick="deleteUser(this)"></td>
                     </tr>
                 {% endfor %}

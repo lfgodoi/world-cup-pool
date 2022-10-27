@@ -11,9 +11,10 @@ function addUser() {
         success: function(data) {
             var userTable = document.querySelector("#table-users");
             userTable.innerHTML += `<tr id='tr-user-${username}'>\
-                                        <td class='td-ranking' id='td-name-${name}'>${name}</td>\
+                                        <td class='td-ranking' id='td-name-${name}'><input type='text' value=${name} id='input-name-${username}'></td>\
                                         <td class='td-ranking' id='td-username-${username}'>${username}</td>\
-                                        <td class='td-ranking' id='td-password-${password}'>${password}</td>\
+                                        <td class='td-ranking' id='td-password-${password}'><input type='text' value=${password} id='input-password-${username}'></td>\
+                                        <td class='td-ranking'><input type='button' class='button-user' id='button-update-${username}' value='Atualizar' onclick='updateUser(this)'></td>\
                                         <td class='td-ranking'><input type='button' class='button-user' id='button-delete-${username}' value='Excluir' onclick='deleteUser(this)'></td>\
                                     </tr>`
             document.querySelector("#input-add-name").value = "";
@@ -42,6 +43,28 @@ function deleteUser(target) {
         },  
         error: function() {
             alert("Erro ao remover jogador!");
+        }
+    })
+}
+
+// Função de atualização de usuário
+function updateUser(target) {
+    var elementId = target.id;
+    var username = elementId.split("button-update-").pop();
+    var name = document.querySelector("#input-name-" + username).value;
+    var password = document.querySelector("#input-password-" + username).value;
+    alert(name + username + password);
+    $.ajax({
+        url : "/updateuser",
+        type : "POST",
+        data : { "username": username,
+                 "name": name,
+                 "password": password },
+        success: function(data) {
+            alert("Jogador atualizado com sucesso!");
+        },  
+        error: function() {
+            alert("Erro ao atualizar jogador!");
         }
     })
 }

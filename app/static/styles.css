@@ -272,3 +272,8 @@ input {
     width: 100%;
     height: 100%;
 }
+
+.td-username {
+    background-color: #e7e4e0;
+    font-size: 14px;
+}

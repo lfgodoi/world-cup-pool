@@ -157,3 +157,12 @@ class DBAccess:
                        WHERE username = %s
                        """, (json.dumps(guesses), username))                
         self.disconnect()
+
+    # Updating a player
+    def update_user(self, name, username, password):
+        cursor = self.connect()
+        cursor.execute("""
+                       UPDATE users SET password = %s, name = %s
+                       WHERE username = %s
+                       """, (password, name, username))                
+        self.disconnect()

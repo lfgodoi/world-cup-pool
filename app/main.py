@@ -114,6 +114,22 @@ def delete_user():
         status_code = 400
     return jsonify({"message" : message}), status_code
 
+# Updating a user
+@app.route("/updateuser", methods=["POST",])
+def update_user():
+    try:
+        name = request.form["name"]
+        username = request.form["username"]
+        password = request.form["password"]
+        db_access = DBAccess()
+        db_access.update_user(name, username, password)
+        message = "Usuário removido com sucesso!"
+        status_code = 200
+    except:
+        message = "Não foi possível remover o usuário!"
+        status_code = 400
+    return jsonify({"message" : message}), status_code
+
 # Saving guesses of a user
 @app.route("/saveguesses", methods=["POST",])
 def save_guesses():
