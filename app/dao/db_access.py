@@ -63,7 +63,6 @@ class DBAccess:
                        WHERE username = %s
                        """, (username,))                
         result = cursor.fetchone()[0]
-        print(result)
         if result is not None:
             guesses = {int(k): v for k, v in result.items()}
         else:

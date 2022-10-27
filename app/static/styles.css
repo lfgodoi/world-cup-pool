@@ -206,7 +206,24 @@ input {
     margin-bottom: 10px;
 }
 
-.td-button {
-    border: none;
-    text-align: left;
+.button-user {
+    width: 100%;
+    height: 100%;
+}
+
+.button-user:hover {
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+}
+
+.button-user:active {
+    background-color: white;
+    color: black;
+    cursor: auto;
+}
+
+.input-user {
+    text-align: center;
+    font-size: 14px;
 }
