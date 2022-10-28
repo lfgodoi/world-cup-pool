@@ -22,11 +22,6 @@
                 </tr>
                 <tr>
                     <td>
-                        <input class="button-option" id="button-save-guesses" type="submit" value="Salvar" onclick="saveGuesses()">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         <form action="/ranking" method="get" class="form-option">
                             <input class="button-option" type="submit" value="Ranking">
                         </form>
@@ -48,6 +43,10 @@
     <!-- Page header -->
     <div class="header">
         <button class="button-menu" id="button-menu"><i class="fa-solid fa-bars"></i></button>
+        <div class="div-save">
+            <input class="button-save" id="button-save-guesses" type="submit" value="Salvar" onclick="saveGuesses()">
+        </div>
+        
     </div>
 
     <!-- Result area-->

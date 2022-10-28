@@ -122,6 +122,30 @@ input {
     cursor: auto;
 }
 
+.div-save {
+    text-align: right;
+    width: 100%;
+}
+
+.button-save {
+    height: 100%;
+    width: 20%;
+    background-color: #e7e4e0;
+    color: black;
+}
+
+.button-save:hover {
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+}
+
+.button-save:active {
+    background-color: #e7e4e0;
+    color: black;
+    cursor: auto;
+}
+
 /* Ranking page */
 
 .table-ranking {
@@ -330,8 +354,8 @@ input {
     background-color: #fefefe;
     border: 1px solid #888;
     padding: 10px;
-    width: 60%;
-    margin-left: 20%;
+    width: 80%;
+    margin-left: 10%;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
