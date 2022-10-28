@@ -125,12 +125,15 @@ class DBAccess:
                        """, (username,))                
         result = cursor.fetchone()
         self.disconnect()
-        user = {
-            "name": result[0],
-            "username": result[1],
-            "password": result[2],
-            "admin_access": result[3]
-        }
+        if result is None:
+            user = None
+        else:
+            user = {
+                "name": result[0],
+                "username": result[1],
+                "password": result[2],
+                "admin_access": result[3]
+            }
         return user
 
     # Adding a player

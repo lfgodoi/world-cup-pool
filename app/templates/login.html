@@ -16,6 +16,10 @@
         <input type="submit" name="login" id="login" value="Entrar" class="button-login">
         <br>
     </form>
+    <br>
+    {% if login_error %}
+        <p class="p-login-error">Usuário e/ou senha incorreto(s).</p>
+    {% endif %}
 </div>
 
 {% endblock %}

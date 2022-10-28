@@ -73,25 +73,34 @@ def management():
 @app.route("/")
 @app.route("/login")
 def login():
-    return render_template("login.html")
+    args = request.args.to_dict()
+    if args == {}:
+        login_error = False
+    else:
+        login_error = request.args["login_error"]
+    return render_template("login.html",
+                           login_error=login_error)
 
 # Authentication
 @app.route("/authenticate", methods=["POST",])
 def authenticate():
     db_access = DBAccess()
     user = db_access.get_user(request.form["username"])
-    if request.form["password"] == user["password"]:
-        session["active_user"] = user["username"]
-        session["admin_access"] = user["admin_access"]
-        return redirect(url_for("guesses"))
+    if user is not None:
+        if request.form["password"] == user["password"]:
+            session["active_user"] = user["username"]
+            session["admin_access"] = user["admin_access"]
+            return redirect(url_for("guesses"))
+        else:
+            return redirect(url_for("login", login_error=True))   
     else:
-        return redirect(url_for("login"))
+        return redirect(url_for("login", login_error=True))
 
 # Logout
 @app.route("/logout")
 def logout():
     session["active_user"] = None
-    return redirect(url_for("routes_login.login"))
+    return redirect(url_for("routes_login.login", login_error=False))
 
 # Adding a new user
 @app.route("/adduser", methods=["POST",])

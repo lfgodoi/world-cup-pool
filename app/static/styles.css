@@ -174,7 +174,7 @@ input {
 }
 
 .input-login {
-    height: 30px;
+    height: 40px;
     border-radius: 10px;
     text-align: center;
     margin-top: 5px;
@@ -219,6 +219,10 @@ input {
 
 .tr-even {
     background-color: #e7e4e0;
+}
+
+.p-login-error {
+    color: #953133;
 }
 
 /* Management page */
