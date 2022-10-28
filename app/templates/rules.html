@@ -1,34 +1,48 @@
 {% extends "template.html" %}
 {% block content %}
 
-    <!-- Page header -->
-    <div class="header">
-        <table class="table-options">
-            <tr>
-                <td>
-                    <form action="/login" method="get">
-                        <input class="button-option" type="submit" value="Sair">
-                    </form>
-                </td>
-                <td>
-                    <form action="/guesses" method="get">
-                        <input class="button-option" type="submit" value="Palpites">
-                    </form>
-                </td>
-                <td>
-                    <form action="/ranking" method="get">
-                        <input class="button-option" type="submit" value="Ranking">
-                    </form>
-                </td>
-                {% if admin_access %}
+    <!-- Modal window -->
+    <div class="modal" id="div-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <table class="table-options">
+                <tr>
                     <td>
-                        <form action="/management" method="get">
-                            <input class="button-option" type="submit" value="Gerenciar">
+                        <form action="/login" method="get" class="form-option">
+                            <input class="button-option" type="submit" value="Sair">
                         </form>
                     </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="/guesses" method="get" class="form-option">
+                            <input class="button-option" type="submit" value="Palpites">
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="/ranking" method="get" class="form-option">
+                            <input class="button-option" type="submit" value="Ranking">
+                        </form>
+                    </td>
+                </tr>
+                {% if admin_access %}
+                    <tr>
+                        <td>
+                            <form action="/management" method="get" class="form-option">
+                                <input class="button-option" type="submit" value="Gerenciar">
+                            </form>
+                        </td>
+                    </tr>
                 {% endif %}
-            </tr>
-        </table>
+            </table>
+        </div>
+    </div>
+
+    <!-- Page header -->
+    <div class="header">
+        <button class="button-menu" id="button-menu"><i class="fa-solid fa-bars"></i></button>
     </div>
 
     <!-- Result area-->
@@ -56,6 +70,9 @@
                     está disponível na página "Ranking", ordenados do melhor para o pior colocado.</p></li>
                 <li><p><b>Vencedores do bolão:</b> Serão premiados os 3 jogadores que atingirem 
                     a maior pontuação.</p></li>
+                <li><p><b>Quantidade de jogos:</b> Inicialmente, todos os 48 jogos da primeira
+                    fase já estarão disponíveis. Os jogos de mata-mata serão adicionados na medida em
+                    que forem confirmados.</p></li>
             </ul>
         </div>
     </div>

@@ -1,29 +1,48 @@
 {% extends "template.html" %}
 {% block content %}
 
-    <!-- Page header -->
-    <div class="header">
-        <table class="table-options">
-            <tr>
-                <td>
-                    <form action="/login" method="get">
-                        <input class="button-option" type="submit" value="Sair">
-                    </form>
-                </td>
-                <td>
-                    <form action="/guesses" method="get">
-                        <input class="button-option" type="submit" value="Palpites">
-                    </form>
-                </td>
-                {% if admin_access %}
+    <!-- Modal window -->
+    <div class="modal" id="div-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <table class="table-options">
+                <tr>
                     <td>
-                        <form action="/management" method="get">
-                            <input class="button-option" type="submit" value="Gerenciar">
+                        <form action="/login" method="get" class="form-option">
+                            <input class="button-option" type="submit" value="Sair">
                         </form>
                     </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="/rules" method="get" class="form-option">
+                            <input class="button-option" type="submit" value="Regras">
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="/ranking" method="get" class="form-option">
+                            <input class="button-option" type="submit" value="Palpites">
+                        </form>
+                    </td>
+                </tr>
+                {% if admin_access %}
+                    <tr>
+                        <td>
+                            <form action="/management" method="get" class="form-option">
+                                <input class="button-option" type="submit" value="Gerenciar">
+                            </form>
+                        </td>
+                    </tr>
                 {% endif %}
-            </tr>
-        </table>
+            </table>
+        </div>
+    </div>
+
+    <!-- Page header -->
+    <div class="header">
+        <button class="button-menu" id="button-menu"><i class="fa-solid fa-bars"></i></button>
     </div>
 
     <!-- Result area-->

@@ -1,27 +1,45 @@
 {% extends "template.html" %}
 {% block content %}
 
-    <!-- Page header -->
-    <div class="header">
-        <table class="table-options">
-            <tr>
+    <!-- Modal window -->
+    <div class="modal" id="div-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <table class="table-options">
+                <tr>
+                    <td>
+                        <form action="/login" method="get" class="form-option">
+                            <input class="button-option" type="submit" value="Sair">
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="/rules" method="get" class="form-option">
+                            <input class="button-option" type="submit" value="Regras">
+                        </form>
+                    </td>
+                </tr>
                 <td>
-                    <form action="/login" method="get">
-                        <input class="button-option" type="submit" value="Sair">
-                    </form>
-                </td>
-                <td>
-                    <form action="/guesses" method="get">
+                    <form action="/guesses" method="get" class="form-option">
                         <input class="button-option" type="submit" value="Palpites">
                     </form>
                 </td>
-                <td>
-                    <form action="/ranking" method="get">
-                        <input class="button-option" type="submit" value="Ranking">
-                    </form>
-                </td>
             </tr>
-        </table>
+                <tr>
+                    <td>
+                        <form action="/ranking" method="get" class="form-option">
+                            <input class="button-option" type="submit" value="Ranking">
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Page header -->
+    <div class="header">
+        <button class="button-menu" id="button-menu"><i class="fa-solid fa-bars"></i></button>
     </div>
 
     <!-- Management area-->
