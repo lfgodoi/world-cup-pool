@@ -1,0 +1,63 @@
+{% extends "template.html" %}
+{% block content %}
+
+    <!-- Page header -->
+    <div class="header">
+        <table class="table-options">
+            <tr>
+                <td>
+                    <form action="/login" method="get">
+                        <input class="button-option" type="submit" value="Sair">
+                    </form>
+                </td>
+                <td>
+                    <form action="/guesses" method="get">
+                        <input class="button-option" type="submit" value="Palpites">
+                    </form>
+                </td>
+                <td>
+                    <form action="/ranking" method="get">
+                        <input class="button-option" type="submit" value="Ranking">
+                    </form>
+                </td>
+                {% if admin_access %}
+                    <td>
+                        <form action="/management" method="get">
+                            <input class="button-option" type="submit" value="Gerenciar">
+                        </form>
+                    </td>
+                {% endif %}
+            </tr>
+        </table>
+    </div>
+
+    <!-- Result area-->
+    <div class="content">
+        <div class="div-rules">
+            <h3>Critérios de pontuação</h3>
+            <ul>
+                <li><p><b>Acertar placar exato:</b> 5 pontos</p></li>
+                <li><p><b>Acertar vencedor/empate:</b> 3 pontos</p></li>
+                <li><p><b>Errar placar e vencedor/empate:</b> 0 ponto</p></li>
+            </ul>
+            <h3>Dinâmica do bolão</h3>
+            <ul>
+                <li><p><b>Prazo de apostas:</b> O palpite de cada jogo poderá ser editado 
+                    quantas vezes necessário até 1 hora antes do início do jogo. A partir 
+                    desse momento, os campos para preenchimento de palpites do jogo serão 
+                    automaticamente bloqueados e não será mais possível editá-lo.</p></li>
+                <li><p><b>Atualização da pontuação:</b> Após o término do jogo, o administrador 
+                    informará o resultado real e, automaticamente, a pontuação de cada jogador 
+                    será atualizada de acordo com o desempenho no jogo em questão.</p></li>
+            </ul>
+            <h3>Premiação</h3>
+            <ul>
+                <li><p><b>Acompanhamento das pontuações:</b> A pontuação de todos os jogadores 
+                    está disponível na página "Ranking", ordenados do melhor para o pior colocado.</p></li>
+                <li><p><b>Vencedores do bolão:</b> Serão premiados os 3 jogadores que atingirem 
+                    a maior pontuação.</p></li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

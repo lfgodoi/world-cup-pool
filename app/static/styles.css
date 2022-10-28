@@ -277,3 +277,10 @@ input {
     background-color: #e7e4e0;
     font-size: 14px;
 }
+
+/* Rules page */
+
+.div-rules {
+    width: 80%;
+    margin-left: 10%;
+}

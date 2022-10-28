@@ -47,6 +47,15 @@ def ranking():
                                users=users,
                                admin_access=session["admin_access"])
 
+# Endpoint - Rendering rules page
+@app.route("/rules")
+def rules():
+    if "active_user" not in session or session["active_user"] == None:
+        return redirect(url_for("login"))
+    else:
+        return render_template("rules.html",
+                               admin_access=session["admin_access"])
+
 # Endpoint - Rendering management page
 @app.route("/management")
 def management():
@@ -70,7 +79,6 @@ def login():
 @app.route("/authenticate", methods=["POST",])
 def authenticate():
     db_access = DBAccess()
-    print(request.form)
     user = db_access.get_user(request.form["username"])
     if request.form["password"] == user["password"]:
         session["active_user"] = user["username"]
