@@ -183,7 +183,7 @@ input {
 }
 
 .label-login {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .button-login {
@@ -229,6 +229,7 @@ input {
     width: 90%;
     text-align: center;
     margin-bottom: 10px;
+    font-size: 18px;
 }
 
 .button-user {
@@ -250,7 +251,7 @@ input {
 
 .input-user {
     text-align: center;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 .tab button:hover {
@@ -284,6 +285,7 @@ input {
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
+    width: 100%;
 }
 
 .button-confirm {
@@ -294,6 +296,15 @@ input {
 .td-username {
     background-color: #e7e4e0;
     font-size: 14px;
+}
+
+.td-user {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.tr-user {
+    height: 40px;
 }
 
 /* Rules page */
