@@ -73,9 +73,11 @@ function saveGuesses() {
     var guesses = {};
     var matches = document.querySelectorAll(".table-match");
     for (let i = 0; i < matches.length; ++i) {
-        guesses[i + 1] = [parseInt(matches[i].querySelector(".goals-1").value),
-                            parseInt(matches[i].querySelector(".goals-2").value),
-                            0];
+        var goals1 = matches[i].querySelector(".goals-1").value;
+        var goals2 = matches[i].querySelector(".goals-2").value;
+        guesses[i + 1] = [parseInt(goals1),
+                          parseInt(goals2),
+                          0];
     }
     $.ajax({
         url : "/saveguesses",
@@ -84,7 +86,7 @@ function saveGuesses() {
         data: JSON.stringify({guesses}),
         dataType: "json",
         success: function(data) {
-            alert("Palpites salvos com sucesso!");
+            alert("Palpites salvos com sucesso! Caracteres não numéricos foram ignorados.");
         },  
         error: function() {
             alert("Erro ao salvar palpites! Verifique os campos preenchidos.");
@@ -127,6 +129,7 @@ function updateMatch(target) {
     })
 }
 
+// Modal window
 $(document).ready(function() {
     var modal = document.querySelector("#div-modal");
     var buttonMenu = document.querySelector("#button-menu");
@@ -143,3 +146,38 @@ $(document).ready(function() {
         }
     })
 })
+
+// Getting the current datetime
+function getCurrentDatetime() {
+    var currentDatetime = new Date(); 
+    return currentDatetime
+}
+
+// Checking datetimes to disable guesses
+function checkDatetimes() {
+    var matches = document.querySelectorAll(".table-match");
+    for (let i = 0; i < matches.length; ++i) {
+        var rawStrDatetime = matches[i].querySelector(".col-datetime").textContent; 
+        var year = rawStrDatetime.slice(6, 10);
+        var month = rawStrDatetime.slice(3, 5);
+        var day = rawStrDatetime.slice(0, 2);
+        var time = rawStrDatetime.slice(11, 17);
+        var strDatetime = year + "-" + month + "-" + day + "T" + time + ":00";
+        var matchDatetime = new Date(strDatetime);
+        var currentDatetime = getCurrentDatetime();
+        if (currentDatetime >= matchDatetime) {
+            matches[i].querySelector(".goals-1").disabled = true;
+            if (matches[i].querySelector(".col-match-status").textContent == "Ainda não jogado") {
+                matches[i].querySelector(".col-match-status").innerHTML = "Partida em andamento";
+            }
+        }
+    }
+}
+
+// Periodic check of datetimes
+setInterval(function() {
+    var url = window.location.pathname;
+    if (url == "/guesses") {
+        checkDatetimes();
+    }
+}, 10000)

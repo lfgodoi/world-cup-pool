@@ -74,9 +74,9 @@
                 </tr>
                 <tr>
                     {% if match["goals_1"] == none %}
-                        <td class="td-match col-real-result" colspan="3">Ainda não jogado</td>
+                        <td class="td-match col-real-result col-match-status" colspan="3">Ainda não jogado</td>
                     {% else %}
-                        <td class="td-match col-real-result" colspan="3">Resultado real: {{ match["goals_1"] }} x {{ match["goals_2"] }}</td>
+                        <td class="td-match col-real-result col-match-status" colspan="3">Resultado real: {{ match["goals_1"] }} x {{ match["goals_2"] }}</td>
                     {% endif %}
                     {% if guesses != none %}
                         <td class="td-match col-score" colspan="2">Pontos ganhos: {{ guesses[match["id"]][2] }}</td>
