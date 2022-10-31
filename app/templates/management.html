@@ -45,12 +45,12 @@
     <!-- Management area-->
     <div class="content">
         <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'users')">Usuários</button>
+            <button class="tablinks active" onclick="openTab(event, 'users')">Usuários</button>
             <button class="tablinks" onclick="openTab(event, 'results')">Resultados</button>
         </div>
           
         <!-- User list tab -->
-        <div id="tab-users" class="tabcontent">
+        <div id="tab-users" class="tabcontent active default-content">
             <table class="table-users" id="table-users">
                 <tr class="tr-header">
                     <td><h4>Nome</h4></td>
@@ -75,7 +75,7 @@
                 {% endfor %}
             </table>
         </div>
-          
+
         <!-- Match results tab -->
         <div id="tab-results" class="tabcontent">
             {% for match in matches %}
