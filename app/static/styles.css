@@ -240,7 +240,7 @@ input {
     width: 90%;
     text-align: center;
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .button-user {
@@ -262,7 +262,7 @@ input {
 
 .input-user {
     text-align: center;
-    font-size: 18px;
+    font-size: 14px;
     height: 40px;
     width: 100%;
 }
@@ -322,7 +322,7 @@ input {
 
 .td-username {
     background-color: #e7e4e0;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .td-user {
