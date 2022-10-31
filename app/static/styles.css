@@ -94,6 +94,7 @@ input {
 .tr-match-result {
     height: 40px;
     font-size: 18px;
+    background-color: #e7e4e0;
 }
 
 .input-goals {
@@ -101,6 +102,11 @@ input {
     text-align: center;
     font-weight: bold;
     padding-left: 15px;
+    background-color: white;
+}
+
+.input-goals:disabled {
+    background-color: #e7e4e0;
 }
 
 .button-option {

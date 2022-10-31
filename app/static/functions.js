@@ -1,3 +1,4 @@
+// Function for adding a new user
 function addUser() {
     var name = document.querySelector("#input-add-name").value;
     var username = document.querySelector("#input-add-username").value;
@@ -94,6 +95,7 @@ function saveGuesses() {
     })
 }
 
+// Tab group mechanism
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -108,7 +110,7 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
-// Função de atualização de resultado
+// Function for updating a match result
 function updateMatch(target) {
     var elementId = target.id;
     var matchId = elementId.split("button-confirm-").pop();
@@ -124,7 +126,7 @@ function updateMatch(target) {
             alert("Resultado atualizado com sucesso!");
         },  
         error: function() {
-            alert("Erro ao atualizar resultado!");
+            alert("Erro ao atualizar resultado! Verifique se os campos foram preenchidos com valores numéricos.");
         }
     })
 }
@@ -154,19 +156,33 @@ function getCurrentDatetime() {
 }
 
 // Checking datetimes to disable guesses
-function checkDatetimes() {
+function checkDatetimes(notify) {
     var matches = document.querySelectorAll(".table-match");
     for (let i = 0; i < matches.length; ++i) {
         var rawStrDatetime = matches[i].querySelector(".col-datetime").textContent; 
         var year = rawStrDatetime.slice(6, 10);
         var month = rawStrDatetime.slice(3, 5);
         var day = rawStrDatetime.slice(0, 2);
-        var time = rawStrDatetime.slice(11, 17);
-        var strDatetime = year + "-" + month + "-" + day + "T" + time + ":00";
-        var matchDatetime = new Date(strDatetime);
+        var hour = rawStrDatetime.slice(11, 13);
+        var intHour = parseInt(hour);
+        var strHour = String(intHour - 1);
+        if (strHour.length == 1) {
+            strHour = "0" + strHour;
+        }
+        var minute = rawStrDatetime.slice(14, 16);
+        var strDatetime = year + "-" + month + "-" + day + "T" + strHour + ":" + minute + ":00";
+        var expireDatetime = new Date(strDatetime);
         var currentDatetime = getCurrentDatetime();
-        if (currentDatetime >= matchDatetime) {
-            matches[i].querySelector(".goals-1").disabled = true;
+        if (currentDatetime >= expireDatetime) {
+            var inputGoals1 = matches[i].querySelector(".goals-1");
+            var inputGoals2 = matches[i].querySelector(".goals-2");
+            if (inputGoals1.disabled == false || inputGoals2.disabled == false) {
+                inputGoals1.disabled = true;
+                inputGoals2.disabled = true;
+                if (notify) {
+                    alert("Tempo expirado para o jogo " + String(i + 1) + ". Bloqueado para novos palpites.");
+                }
+            }
             if (matches[i].querySelector(".col-match-status").textContent == "Ainda não jogado") {
                 matches[i].querySelector(".col-match-status").innerHTML = "Partida em andamento";
             }
@@ -178,6 +194,14 @@ function checkDatetimes() {
 setInterval(function() {
     var url = window.location.pathname;
     if (url == "/guesses") {
-        checkDatetimes();
+        checkDatetimes(true);
     }
-}, 10000)
+}, 60000)
+
+// Initial check of datetimes
+$(document).ready(function() {
+    var url = window.location.pathname;
+    if (url == "/guesses") {
+        checkDatetimes(false);
+    }
+})

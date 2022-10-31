@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="div-login">
-    <form method="post" action="{{ url_for('authenticate') }}">
+    <form method="post" action="{{ url_for('routes_login.authenticate') }}">
         <img src="./static/images/logo.png" alt="background Image"class="image-login">
         <br><br>
         <label for="username" class="label-login">Usuário</label>
