@@ -33,19 +33,25 @@ function addUser() {
 function deleteUser(target) {
     var elementId = target.id;
     var username = elementId.split("button-delete-").pop();
-    $.ajax({
-        url : "/deleteuser",
-        type : "POST",
-        data : { "username": username },
-        success: function(data) {
-            var userRow = document.querySelector("#tr-user-" + username);
-            userRow.parentNode.removeChild(userRow)
-            alert("Jogador removido com sucesso!");
-        },  
-        error: function() {
-            alert("Erro ao remover jogador!");
-        }
-    })
+    let text = `Tem certeza que deseja remover o jogador '${username}'?`;
+    if (confirm(text) == true) {
+        $.ajax({
+            url : "/deleteuser",
+            type : "POST",
+            data : { "username": username },
+            success: function(data) {
+                var userRow = document.querySelector("#tr-user-" + username);
+                userRow.parentNode.removeChild(userRow)
+                alert("Jogador removido com sucesso!");
+            },  
+            error: function() {
+                alert("Erro ao remover jogador!");
+            }
+        })
+    }
+    else {
+        alert("ação cancelada!");
+    }
 }
 
 // Função de atualização de usuário

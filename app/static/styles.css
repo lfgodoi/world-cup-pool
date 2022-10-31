@@ -263,6 +263,8 @@ input {
 .input-user {
     text-align: center;
     font-size: 18px;
+    height: 40px;
+    width: 100%;
 }
 
 .tab button:hover {
