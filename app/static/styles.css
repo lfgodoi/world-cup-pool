@@ -168,6 +168,10 @@ input {
     border-collapse: collapse;
 }
 
+.tr-ranking {
+    height: 30px;
+}
+
 /* Login page */
 
 .div-login {

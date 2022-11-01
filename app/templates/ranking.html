@@ -56,15 +56,15 @@
             </tr>
             {% for user in users %}
                 {% if loop.index %2 == 0 %}
-                    <tr class="tr-even">
+                    <tr class="tr-ranking tr-even">
                 {% else %}
-                    <tr class="tr-odd">
+                    <tr class="tr-ranking tr-odd">
                 {% endif %}
-                    <td class="td-ranking">{{ user["position"] }}</td>
-                    <td class="td-ranking">{{ user["name"] }}</td>
-                    <td class="td-ranking">{{ user["username"] }}</td>
-                    <td class="td-ranking">{{ user["score"] }}</td>
-                </tr>
+                        <td class="td-ranking">{{ user["position"] }}</td>
+                        <td class="td-ranking">{{ user["name"] }}</td>
+                        <td class="td-ranking">{{ user["username"] }}</td>
+                        <td class="td-ranking">{{ user["score"] }}</td>
+                    </tr>
             {% endfor %}
         </table>
     </div>
