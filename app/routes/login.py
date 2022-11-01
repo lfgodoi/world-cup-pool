@@ -20,7 +20,7 @@ def login():
     if args == {}:
         login_error = False
     else:
-        login_error = request.args["login_error"]
+        login_error = bool(int(request.args["login_error"]))
     return render_template("login.html",
                            login_error=login_error)
 
@@ -35,12 +35,12 @@ def authenticate():
             session["admin_access"] = user["admin_access"]
             return redirect(url_for("routes_guesses.guesses"))
         else:
-            return redirect(url_for("routes_login.login", login_error=True))   
+            return redirect(url_for("routes_login.login", login_error=1))   
     else:
-        return redirect(url_for("routes_login.login", login_error=True))
+        return redirect(url_for("routes_login.login", login_error=1))
 
 # Logout
 @login_bp.route("/logout")
 def logout():
     session["active_user"] = None
-    return redirect(url_for("routes_login.login", login_error=False))
+    return redirect(url_for("routes_login.login", login_error=0))

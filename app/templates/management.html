@@ -79,7 +79,7 @@
         <!-- Match results tab -->
         <div id="tab-results" class="tabcontent">
             {% for match in matches %}
-                <table class="table-match" id="table-match-{{ match['id'] }}">
+                <table class="table-results" id="table-results-{{ match['id'] }}">
                     <tr class="tr-match-info">
                         <td class="td-match col-id" colspan="1">Jogo {{ match["id"] }}</td>
                         <td class="td-match col-datetime" colspan="5">{{ match["datetime"] }}</td>

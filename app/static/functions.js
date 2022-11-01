@@ -15,8 +15,8 @@ function addUser() {
                                         <td class='td-ranking' id='td-name-${name}'><input type='text' value=${name} class='input-user' id='input-name-${username}'></td>\
                                         <td class='td-ranking' id='td-username-${username}'>${username}</td>\
                                         <td class='td-ranking' id='td-password-${password}'><input type='text' value=${password} class='input-user' id='input-password-${username}'></td>\
-                                        <td class='td-ranking'><input type='button' class='button-user' id='button-update-${username}' value='Atualizar' onclick='updateUser(this)'></td>\
-                                        <td class='td-ranking'><input type='button' class='button-user' id='button-delete-${username}' value='Excluir' onclick='deleteUser(this)'></td>\
+                                        <td class='td-ranking'><button type='button' class='button-user' id='button-update-${username}' onclick='updateUser(this)'><i class='fa-solid fa-floppy-disk'></button></td>\
+                                        <td class='td-ranking'><button type='button' class='button-user' id='button-delete-${username}' onclick='deleteUser(this)'><i class='fa-solid fa-trash'></button></td>\
                                     </tr>`
             document.querySelector("#input-add-name").value = "";
             document.querySelector("#input-add-username").value = "";
