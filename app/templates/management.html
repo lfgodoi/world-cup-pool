@@ -62,15 +62,15 @@
                     <td class="td-user"><input type="text" class="input-user" id="input-add-name"></td>
                     <td class="td-user"><input type="text" class="input-user" id="input-add-username"></td>
                     <td class="td-user"><input type="text" class="input-user" id="input-add-password"></td>
-                    <td class="td-user"><input type="button" class="button-user" id="button-add-user" value="Adicionar" onclick="addUser()"></td>
+                    <td class="td-user"><button class="button-user" id="button-add-user"onclick="addUser()"><i class="fas fa-plus"></i></button></td>
                 </tr>            
                 {% for user in users %}
                     <tr class="tr-user" id="tr-user-{{ user['username'] }}">
                         <td class="td-user" id="td-name-{{ user['name'] }}"><input type="text" value="{{ user['name'] }}" class="input-user" id="input-name-{{ user['username'] }}"></td>
                         <td class="td-user td-username" id="td-username-{{ user['username'] }}">{{ user["username"] }}</td>
                         <td class="td-user" id="td-password-{{ user['password'] }}"><input type="text" value="{{ user['password'] }}" class="input-user" id="input-password-{{ user['username'] }}"></td>
-                        <td class="td-user"><input type="button" class="button-user" id="button-update-{{ user['username'] }}" value="Atualizar" onclick="updateUser(this)"></td>
-                        <td class="td-user"><input type="button" class="button-user" id="button-delete-{{ user['username'] }}" value="Excluir" onclick="deleteUser(this)"></td>
+                        <td class="td-user"><button type="button" class="button-user" id="button-update-{{ user['username'] }}" onclick="updateUser(this)"><i class="fa-solid fa-floppy-disk"></i></button></td>
+                        <td class="td-user"><button type="button" class="button-user" id="button-delete-{{ user['username'] }}" onclick="deleteUser(this)"><i class="fa-solid fa-trash"></i></button></td>
                     </tr>
                 {% endfor %}
             </table>
