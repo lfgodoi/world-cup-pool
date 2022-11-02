@@ -61,16 +61,18 @@ class DBAccess:
     def get_guesses(self, username):
         cursor = self.connect()
         cursor.execute("""
-                       SELECT guesses FROM users
+                       SELECT guesses, score FROM users
                        WHERE username = %s
                        """, (username,))                
-        result = cursor.fetchone()[0]
+        results = cursor.fetchone()
+        score = results[1]
+        result = results[0]
         if result is not None:
             guesses = {int(k): v for k, v in result.items()}
         else:
             guesses = result
         self.disconnect()
-        return guesses
+        return guesses, score
 
    # Reading data from every player for building the user list
     def get_users_management(self):

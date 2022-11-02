@@ -21,10 +21,11 @@ def guesses():
     else:
         db_access = DBAccess()
         matches = db_access.get_matches()
-        guesses = db_access.get_guesses(session["active_user"])
+        guesses, score = db_access.get_guesses(session["active_user"])
         return render_template("guesses.html", 
                                matches=matches,
                                guesses=guesses,
+                               score=score,
                                admin_access=session["admin_access"])
 
 # Saving guesses of a user

@@ -42,11 +42,15 @@
 
     <!-- Page header -->
     <div class="header">
-        <button class="button-menu" id="button-menu"><i class="fa-solid fa-bars"></i></button>
-        <div class="div-save">
+        <div class="header-1">
+            <button class="button-menu" id="button-menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        <div class="header-2">
+            <p class="p-score">Pontos totais: {{ score }}</p>
+        </div>
+        <div class="header-3">
             <input class="button-save" id="button-save-guesses" type="submit" value="Salvar" onclick="saveGuesses()">
         </div>
-        
     </div>
 
     <!-- Result area-->
