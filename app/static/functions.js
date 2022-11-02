@@ -132,7 +132,7 @@ function updateMatch(target) {
             alert("Resultado atualizado com sucesso!");
         },  
         error: function() {
-            alert("Erro ao atualizar resultado! Verifique se os campos foram preenchidos com valores numéricos.");
+            alert("Erro ao atualizar resultado! Os campos devem ser ambos numéricos ou ambos vazios.");
         }
     })
 }

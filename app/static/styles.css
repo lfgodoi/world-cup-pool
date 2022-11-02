@@ -147,6 +147,7 @@ input {
     width: 20%;
     background-color: gray;
     color: white;
+    font-size: 18px;
 }
 
 .button-save:hover {

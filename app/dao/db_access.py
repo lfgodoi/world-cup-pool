@@ -193,19 +193,22 @@ class DBAccess:
             guesses = result[1]
             if guesses is not None:
                 guesses = {int(k): v for k, v in guesses.items()}
-                if None in guesses[match_id]:
-                    guesses[match_id][2] = 0
-                else:
-                    if guesses[match_id][0] == goals_1 and guesses[match_id][1] == goals_2:
-                        guesses[match_id][2] = 5
-                    elif guesses[match_id][0] > guesses[match_id][1] and goals_1 > goals_2:
-                        guesses[match_id][2] = 3
-                    elif guesses[match_id][0] < guesses[match_id][1] and goals_1 < goals_2:
-                        guesses[match_id][2] = 3
-                    elif guesses[match_id][0] == guesses[match_id][1] and goals_1 == goals_2:
-                        guesses[match_id][2] = 3
-                    else:
+                if goals_1 is not None and goals_2 is not None:
+                    if None in guesses[match_id]:
                         guesses[match_id][2] = 0
+                    else:
+                        if guesses[match_id][0] == goals_1 and guesses[match_id][1] == goals_2:
+                            guesses[match_id][2] = 5
+                        elif guesses[match_id][0] > guesses[match_id][1] and goals_1 > goals_2:
+                            guesses[match_id][2] = 3
+                        elif guesses[match_id][0] < guesses[match_id][1] and goals_1 < goals_2:
+                            guesses[match_id][2] = 3
+                        elif guesses[match_id][0] == guesses[match_id][1] and goals_1 == goals_2:
+                            guesses[match_id][2] = 3
+                        else:
+                            guesses[match_id][2] = 0
+                else:
+                    guesses[match_id][2] = 0
                 cursor.execute("""
                             UPDATE users SET guesses = %s
                             WHERE id = %s

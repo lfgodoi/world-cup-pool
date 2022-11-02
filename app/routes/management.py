@@ -77,14 +77,23 @@ def update_user():
 def update_match():
     try:
         match_id = int(request.form["match_id"])
-        goals_1 = int(request.form["goals_1"])
-        goals_2 = int(request.form["goals_2"])
-        db_access = DBAccess()
-        db_access.update_match(match_id, goals_1, goals_2)
-        db_access.update_scores(match_id, goals_1, goals_2)
-        db_access.sum_scores()
-        message = "Usuário removido com sucesso!"
-        status_code = 200
+        if request.form["goals_1"] != "":
+            goals_1 = int(request.form["goals_1"])
+        else:
+            goals_1 = None
+        if request.form["goals_2"] != "":
+            goals_2 = int(request.form["goals_2"])
+        else:
+            goals_2 = None
+        if (goals_1 is None or goals_2 is None) and goals_1 != goals_2:
+            raise Exception("Detectada combinação de gols inválida")
+        else:
+            db_access = DBAccess()
+            db_access.update_match(match_id, goals_1, goals_2)
+            db_access.update_scores(match_id, goals_1, goals_2)
+            db_access.sum_scores()
+            message = "Usuário removido com sucesso!"
+            status_code = 200
     except:
         message = "Não foi possível remover o usuário!"
         status_code = 400
