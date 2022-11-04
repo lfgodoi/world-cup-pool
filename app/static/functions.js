@@ -211,3 +211,13 @@ $(document).ready(function() {
         checkDatetimes(false);
     }
 })
+
+// Toggle password visibility
+function togglePasswordVisibility() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
