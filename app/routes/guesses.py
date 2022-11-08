@@ -26,6 +26,7 @@ def guesses():
                                matches=matches,
                                guesses=guesses,
                                score=score,
+                               username=session["active_user"],
                                admin_access=session["admin_access"])
 
 # Saving guesses of a user
