@@ -1,8 +1,11 @@
 // Function for adding a new user
 function addUser() {
     var name = document.querySelector("#input-add-name").value;
+    name = name.trim();
     var username = document.querySelector("#input-add-username").value;
+    username = username.trim();
     var password = document.querySelector("#input-add-password").value;
+    password = password.trim();
     $.ajax({
         url : "/adduser",
         type : "POST",
@@ -58,8 +61,11 @@ function deleteUser(target) {
 function updateUser(target) {
     var elementId = target.id;
     var username = elementId.split("button-update-").pop();
+    username = username.trim();
     var name = document.querySelector("#input-name-" + username).value;
+    name = name.trim();
     var password = document.querySelector("#input-password-" + username).value;
+    password = password.trim();
     $.ajax({
         url : "/updateuser",
         type : "POST",

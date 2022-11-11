@@ -60,6 +60,7 @@ def delete_user():
 @management_bp.route("/updateuser", methods=["POST",])
 def update_user():
     try:
+        print("a")
         name = request.form["name"]
         username = request.form["username"]
         password = request.form["password"]
