@@ -107,12 +107,20 @@ class DBAccess:
         self.disconnect()
         users = []
         counter = 1
+        last_score = -1
+        cumulated_position = 1
         for result in results:
+            if result[2] == last_score:
+                position = cumulated_position
+            else:
+                position = counter
+                cumulated_position = counter
+                last_score = result[2]
             user = {
                 "name": result[0],
                 "username": result[1],
                 "score": result[2],
-                "position": counter
+                "position": position
             }
             users.append(user)
             counter += 1

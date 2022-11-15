@@ -99,7 +99,7 @@ function saveGuesses() {
         data: JSON.stringify({guesses}),
         dataType: "json",
         success: function(data) {
-            alert("Palpites salvos com sucesso! Caracteres não numéricos foram ignorados.");
+            alert("Palpites salvos com sucesso!");
         },  
         error: function() {
             alert("Erro ao salvar palpites! Verifique os campos preenchidos.");
