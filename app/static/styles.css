@@ -438,15 +438,48 @@ input {
     overflow-y: auto;
 }
   
-.close {
+.close, .close-comparison {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
   
-.close:hover, .close:focus {
+.close:hover, .close:focus, .close-comparison:focus, .close-comparison:hover {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.button-comparison {
+    float: right;
+    background-color: #953133;
+    color: #e7e4e0;
+    border-radius: 5px;
+    border: none;
+    width: 40px;
+}
+
+.button-comparison:focus, .button-comparison:hover {
+    background-color: gray;
+    cursor: pointer;
+}
+
+#table-comparison {
+    font-size: 12px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.th-comparison, .td-comparison {
+    border: 0.5px solid black;
+}
+
+.td-comparison {
+    height: 20px;
+}
+
+.th-comparison {
+    background-color: #e7e4e0;
+    height: 25px;
 }

@@ -247,3 +247,33 @@ class DBAccess:
                         WHERE id = %s
                         """, (total_score, user_id))          
         self.disconnect()
+
+   # Reading guesses from all users for the same match
+    def get_comparison(self, match_id):
+        cursor = self.connect()
+        cursor.execute("""
+                       SELECT name, guesses FROM users
+                       ORDER BY name
+                        """)              
+        results = cursor.fetchall()
+        self.disconnect()
+        users = []
+        for result in results:
+            if result[1] is None:
+                user = {
+                    "name": result[0],
+                    "guess": ["Nulo", "Nulo", 0]
+                }
+            else:
+                if None in result[1][str(match_id)]:
+                    user = {
+                        "name": result[0],
+                        "guess": ["Nulo", "Nulo", 0]                        
+                    }
+                else:
+                    user = {
+                        "name": result[0],
+                        "guess": result[1][str(match_id)]
+                    }
+            users.append(user)
+        return users

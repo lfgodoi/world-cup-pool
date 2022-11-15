@@ -42,3 +42,16 @@ def save_guesses():
         message = "Não foi possível remover o usuário!"
         status_code = 400
     return jsonify({"message" : message}), status_code
+
+# Showing result comparison along all users
+@guesses_bp.route("/getcomparison", methods=["POST",])
+def get_comparison():
+    try:
+        match_id = request.form["match_id"]
+        db_access = DBAccess()
+        comparison = db_access.get_comparison(match_id)
+        status_code = 200
+    except:
+        comparison = "Não foi possível obter comparações!"
+        status_code = 400
+    return jsonify({"comparison" : comparison}), status_code

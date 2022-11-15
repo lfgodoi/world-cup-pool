@@ -143,7 +143,7 @@ function updateMatch(target) {
     })
 }
 
-// Modal window
+// Menu modal window
 $(document).ready(function() {
     var modal = document.querySelector("#div-modal");
     var buttonMenu = document.querySelector("#button-menu");
@@ -151,6 +151,26 @@ $(document).ready(function() {
     buttonMenu.addEventListener("click", function() {
         modal.style.display = "block";
     });
+    closeSpan.addEventListener("click", function() {
+        modal.style.display = "none";
+    });
+    window.addEventListener("click", function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    })
+})
+
+// Result comparison modal window
+$(document).ready(function() {
+    var modal = document.querySelector("#div-modal-comparison");
+    var buttonComparison = document.querySelectorAll(".button-comparison");
+    for (let i = 0; i < buttonComparison.length; ++i) {
+        buttonComparison[i].addEventListener("click", function() {
+            modal.style.display = "block";
+        });
+    }
+    var closeSpan = document.querySelectorAll(".close-comparison")[0];
     closeSpan.addEventListener("click", function() {
         modal.style.display = "none";
     });
@@ -222,8 +242,39 @@ $(document).ready(function() {
 function togglePasswordVisibility() {
     var x = document.getElementById("password");
     if (x.type === "password") {
-      x.type = "text";
+        x.type = "text";
     } else {
-      x.type = "password";
+        x.type = "password";
     }
-  }
+}
+
+// Showing result comparison
+function openComparison(button) {
+    var elementId = button.id;
+    var matchId = elementId.split("button-comparison-").pop();
+    var tableComparison = document.querySelector("#table-comparison"); 
+    tableComparison.innerHTML = "";
+    $.ajax({
+        url : "/getcomparison",
+        type : "POST",
+        data : { "match_id": matchId },
+        success: function(data) {
+            tableComparison.innerHTML += `<tr>\
+                                          <th class="th-comparison">Jogador</th>\
+                                          <th class="th-comparison">Palpite</th>\
+                                          <th class="th-comparison">Pontos</th>\
+        </tr>`;            
+            for (let i = 0; i < data.comparison.length; ++i) {
+                tableComparison.innerHTML += `<tr>\
+                                                  <td class="td-comparison">${data.comparison[i]["name"]}</td>\
+                                                  <td class="td-comparison">${data.comparison[i]["guess"][0]}&nbsp;x&nbsp;${data.comparison[i]["guess"][1]}</td>\
+                                                  <td class="td-comparison">${data.comparison[i]["guess"][2]}</td>\
+                                              </tr>`;
+            }
+            console.log("Resultado atualizado com sucesso!");
+        },  
+        error: function() {
+            alert("Não foi possível abrir a janela de comparação de resultados!");
+        }
+    })
+}

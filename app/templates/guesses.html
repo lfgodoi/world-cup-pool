@@ -1,7 +1,7 @@
 {% extends "template.html" %}
 {% block content %}
 
-    <!-- Modal window -->
+    <!-- Menu modal window -->
     <div class="modal" id="div-modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -40,6 +40,15 @@
         </div>
     </div>
 
+    <!-- Result comparison modal window -->
+    <div class="modal" id="div-modal-comparison">
+        <div class="modal-content">
+            <span class="close-comparison">&times;</span>
+            <table class="table-options" id="table-comparison">
+            </table>
+        </div>
+    </div>
+
     <!-- Page header -->
     <div class="header">
         <div class="header-1">
@@ -59,7 +68,9 @@
             <table class="table-match" id="table-match-{{ match['id'] }}">
                 <tr class="tr-match-info">
                     <td class="td-match col-id" colspan="1">Jogo {{ match["id"] }}</td>
-                    <td class="td-match col-datetime" colspan="4">{{ match["datetime"] }}</td>
+                    <td class="td-match col-datetime" colspan="4">{{ match["datetime"] }}
+                        <button class="button-comparison" id="button-comparison-{{ match['id'] }}" onclick="openComparison(this)"><i class="fa fa-eye"></i></button>
+                    </td>
                 </tr>
                 <tr class="tr-match-result">
                     <td class="td-match col-team">{{ match["team_1"] }}</td>
