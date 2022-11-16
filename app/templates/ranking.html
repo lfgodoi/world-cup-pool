@@ -52,8 +52,7 @@
         <table class="table-match">
             <tr class="tr-header">
                 <td><h4>Posição</h4></td>
-                <td><h4>Nome</h4></td>
-                <td><h4>Usuário</h4></td>
+                <td><h4>Jogador</h4></td>
                 <td><h4>Pontos</h4></td>
             </tr>
             {% for user in users %}
@@ -63,8 +62,7 @@
                     <tr class="tr-ranking tr-odd">
                 {% endif %}
                         <td class="td-ranking">{{ user["position"] }}</td>
-                        <td class="td-ranking">{{ user["name"] }}</td>
-                        <td class="td-ranking">{{ user["username"] }}</td>
+                        <td class="td-ranking">{{ user["name"] }} ({{ user["username"] }})</td>
                         <td class="td-ranking">{{ user["score"] }}</td>
                     </tr>
             {% endfor %}
