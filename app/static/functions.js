@@ -252,6 +252,9 @@ function togglePasswordVisibility() {
 function openComparison(button) {
     var elementId = button.id;
     var matchId = elementId.split("button-comparison-").pop();
+    var colId = document.querySelector("#col-id-" + matchId).innerHTML;
+    var team1 = document.querySelector("#col-team-1-" + matchId).innerHTML;
+    var team2 = document.querySelector("#col-team-2-" + matchId).innerHTML;
     var tableComparison = document.querySelector("#table-comparison"); 
     tableComparison.innerHTML = "";
     $.ajax({
@@ -259,11 +262,14 @@ function openComparison(button) {
         type : "POST",
         data : { "match_id": matchId },
         success: function(data) {
-            tableComparison.innerHTML += `<tr>\
-                                          <th class="th-comparison">Jogador</th>\
-                                          <th class="th-comparison">Palpite</th>\
-                                          <th class="th-comparison">Pontos</th>\
-        </tr>`;            
+            tableComparison.innerHTML += `<tr>
+                                              <th class="th-comparison" colspan="3">${colId} - ${team1} x ${team2}</th>
+                                          </tr>
+                                          <tr>\
+                                              <th class="th-comparison">Jogador</th>\
+                                              <th class="th-comparison">Palpite</th>\
+                                              <th class="th-comparison">Pontos</th>\
+                                          </tr>`;            
             for (let i = 0; i < data.comparison.length; ++i) {
                 if (data.comparison[i]["guess"][0] == "Nulo" && data.comparison[i]["guess"][1] == "Nulo") {
                     tableComparison.innerHTML += `<tr>\
