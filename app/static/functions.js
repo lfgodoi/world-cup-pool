@@ -265,11 +265,20 @@ function openComparison(button) {
                                           <th class="th-comparison">Pontos</th>\
         </tr>`;            
             for (let i = 0; i < data.comparison.length; ++i) {
-                tableComparison.innerHTML += `<tr>\
-                                                  <td class="td-comparison">${data.comparison[i]["name"]}</td>\
-                                                  <td class="td-comparison">${data.comparison[i]["guess"][0]}&nbsp;x&nbsp;${data.comparison[i]["guess"][1]}</td>\
-                                                  <td class="td-comparison">${data.comparison[i]["guess"][2]}</td>\
-                                              </tr>`;
+                if (data.comparison[i]["guess"][0] == "Nulo" && data.comparison[i]["guess"][1] == "Nulo") {
+                    tableComparison.innerHTML += `<tr>\
+                                                      <td class="td-comparison">${data.comparison[i]["name"]}</td>\
+                                                      <td class="td-comparison">Sem palpite</td>\
+                                                      <td class="td-comparison">${data.comparison[i]["guess"][2]}</td>\
+                                                  </tr>`;
+                }
+                else {
+                    tableComparison.innerHTML += `<tr>\
+                                                      <td class="td-comparison">${data.comparison[i]["name"]}</td>\
+                                                      <td class="td-comparison">${data.comparison[i]["guess"][0]}&nbsp;x&nbsp;${data.comparison[i]["guess"][1]}</td>\
+                                                      <td class="td-comparison">${data.comparison[i]["guess"][2]}</td>\
+                                                  </tr>`;
+                }
             }
             console.log("Resultado atualizado com sucesso!");
         },  
