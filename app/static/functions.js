@@ -268,7 +268,7 @@ function openComparison(button) {
                 if (data.comparison[i]["guess"][0] == "Nulo" && data.comparison[i]["guess"][1] == "Nulo") {
                     tableComparison.innerHTML += `<tr>\
                                                       <td class="td-comparison">${data.comparison[i]["name"]}</td>\
-                                                      <td class="td-comparison">Sem palpite</td>\
+                                                      <td class="td-comparison">-</td>\
                                                       <td class="td-comparison">${data.comparison[i]["guess"][2]}</td>\
                                                   </tr>`;
                 }
