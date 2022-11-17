@@ -82,7 +82,7 @@ function updateUser(target) {
 }
 
 // Salvando palpites de um jogador
-function saveGuesses() {
+function saveGuesses(verbose) {
     var guesses = {};
     var matches = document.querySelectorAll(".table-match");
     for (let i = 0; i < matches.length; ++i) {
@@ -99,10 +99,14 @@ function saveGuesses() {
         data: JSON.stringify({guesses}),
         dataType: "json",
         success: function(data) {
-            alert("Palpites salvos com sucesso!");
+            if (verbose == true) {
+                alert("Palpites salvos com sucesso!");
+            }
         },  
         error: function() {
-            alert("Erro ao salvar palpites! Verifique os campos preenchidos.");
+            if (verbose == true) {
+                alert("Erro ao salvar palpites! Verifique os campos preenchidos.");
+            }
         }
     })
 }
