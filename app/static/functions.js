@@ -224,19 +224,21 @@ function checkDatetimes(notify) {
         var strDatetime = year + "-" + month + "-" + day + "T" + strHour + ":" + minute + ":00";
         var expireDatetime = new Date(strDatetime);
         var currentDatetime = getCurrentDatetime();
+        var inputGoals1 = matches[i].querySelector(".goals-1");
+        var inputGoals2 = matches[i].querySelector(".goals-2");
         if (currentDatetime >= expireDatetime) {
-            var inputGoals1 = matches[i].querySelector(".goals-1");
-            var inputGoals2 = matches[i].querySelector(".goals-2");
-            if (inputGoals1.disabled == false || inputGoals2.disabled == false) {
-                inputGoals1.disabled = true;
-                inputGoals2.disabled = true;
-                if (notify) {
-                    alert("Tempo expirado para o jogo " + String(i + 1) + ". Bloqueado para novos palpites.");
-                }
+            inputGoals1.disabled = true;
+            inputGoals2.disabled = true;
+            if (notify) {
+                alert("Tempo expirado para o jogo " + String(i + 1) + ". Bloqueado para novos palpites.");
             }
             if (matches[i].querySelector(".col-match-status").textContent == "Ainda não jogado") {
                 matches[i].querySelector(".col-match-status").innerHTML = "Partida em andamento";
             }
+        }
+        else {
+            inputGoals1.disabled = false;
+            inputGoals2.disabled = false;
         }
     }
 }
