@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <!-- Result area-->
+    <!-- Result area -->
     <div class="content">
         {% for match in matches %}
             <table class="table-match" id="table-match-{{ match['id'] }}">
@@ -101,6 +101,9 @@
                 </tr>
             </table>
         {% endfor %}
+        <div class="div-access-menu" id="div-access-menu" onclick="openMenu()">
+            <h3>Acessar o menu</h3>
+        </div>
     </div>
 
 {% endblock %}

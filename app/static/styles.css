@@ -17,16 +17,18 @@ input {
 /* Guesses page */
 
 .header {
-    position: absolute;
-    margin-top: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
     height: 50px;
     width: 100%;
     background-color: #953133;
     display: flex;
+    z-index: 2;
 }
 
 .content {
-    position: absolute;
+    position: fixed;
     margin-top: 60px;
     height: 100%;
     width: 100%;
@@ -176,6 +178,18 @@ input {
     background-color: gray;
     color: white;
     cursor: auto;
+}
+
+.div-access-menu {
+    margin-top: 30px;
+    text-align: center;
+    color: black;
+    cursor: auto;
+}
+
+.div-access-menu:hover, .div-access-menu:focus {
+    color: #953133;
+    cursor: pointer;
 }
 
 /* Ranking page */
@@ -414,7 +428,7 @@ input {
 .modal {
     display: none;
     position: fixed;
-    z-index: 2;
+    z-index: 3;
     left: 0;
     top: 0;
     width: 100%;

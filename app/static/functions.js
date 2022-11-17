@@ -147,6 +147,21 @@ function updateMatch(target) {
     })
 }
 
+// Opening the menu via alternative access
+function openMenu() {
+    var modal = document.querySelector("#div-modal");
+    var closeSpan = document.querySelectorAll(".close")[0];
+    modal.style.display = "block";
+    closeSpan.addEventListener("click", function() {
+        modal.style.display = "none";
+    });
+    window.addEventListener("click", function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    })
+}
+
 // Menu modal window
 $(document).ready(function() {
     var modal = document.querySelector("#div-modal");
