@@ -247,7 +247,7 @@ function checkDatetimes(notify) {
 setInterval(function() {
     var url = window.location.pathname;
     if (url == "/guesses") {
-        checkDatetimes(true);
+        checkDatetimes(false);
     }
 }, 60000)
 
