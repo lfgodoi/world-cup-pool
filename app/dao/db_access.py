@@ -112,6 +112,7 @@ class DBAccess:
         for result in results:
             if result[2] == last_score:
                 position = cumulated_position
+                position = counter
             else:
                 position = counter
                 cumulated_position = counter
