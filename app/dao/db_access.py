@@ -101,7 +101,7 @@ class DBAccess:
         cursor = self.connect() 
         cursor.execute("""
                     SELECT name, username, score FROM users
-                    ORDER BY score DESC
+                    ORDER BY score DESC, name ASC
                         """)                
         results = cursor.fetchall()
         self.disconnect()
