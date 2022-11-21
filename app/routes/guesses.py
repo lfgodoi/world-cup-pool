@@ -30,12 +30,14 @@ def guesses():
                                admin_access=session["admin_access"])
 
 # Saving guesses of a user
-@guesses_bp.route("/saveguesses", methods=["POST",])
+@guesses_bp.route("/saveguess", methods=["POST",])
 def save_guesses():
     try:
-        guesses = request.get_json()["guesses"]
+        match_id = int(request.form["match_id"])
+        goals_1 = request.form["goals_1"]
+        goals_2 = request.form["goals_2"]
         db_access = DBAccess()
-        db_access.save_guesses(session["active_user"], guesses)
+        db_access.save_guess(session["active_user"], match_id, goals_1, goals_2)
         message = "Usuário removido com sucesso!"
         status_code = 200
     except:

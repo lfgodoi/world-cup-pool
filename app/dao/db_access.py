@@ -165,13 +165,21 @@ class DBAccess:
                        """, (username,))                
         self.disconnect()
     
-    # Saving guesses of a player
-    def save_guesses(self, username, guesses):
+    # Saving a new guess of a player
+    def save_guess(self, username, match_id, goals_1, goals_2):
         cursor = self.connect()
+        cursor.execute("""
+                       SELECT guesses FROM users
+                       WHERE username = %s
+                       """, (username,)) 
+        result = cursor.fetchone()
+        guesses = result[0]
+        updated_guesses = guesses
+        updated_guesses[str(match_id)] = [goals_1, goals_2, 0]
         cursor.execute("""
                        UPDATE users SET guesses = %s
                        WHERE username = %s
-                       """, (json.dumps(guesses), username))                
+                       """, (json.dumps(updated_guesses), username))                
         self.disconnect()
 
     # Updating a player

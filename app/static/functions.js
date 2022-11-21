@@ -82,21 +82,22 @@ function updateUser(target) {
 }
 
 // Salvando palpites de um jogador
-function saveGuesses(verbose) {
-    var guesses = {};
-    var matches = document.querySelectorAll(".table-match");
-    for (let i = 0; i < matches.length; ++i) {
-        var goals1 = matches[i].querySelector(".goals-1").value;
-        var goals2 = matches[i].querySelector(".goals-2").value;
-        guesses[i + 1] = [parseInt(goals1),
-                          parseInt(goals2),
-                          0];
+function saveGuesses(target, verbose) {
+    var elementId = target.id;
+    if (elementId.includes("input-goals-1")) {
+        var matchId = elementId.split("input-goals-1-").pop();
     }
+    else {
+        var matchId = elementId.split("input-goals-2-").pop();
+    } 
+    var goals1 = document.querySelector("#input-goals-1-" + matchId).value;
+    var goals2 = document.querySelector("#input-goals-2-" + matchId).value;
     $.ajax({
-        url : "/saveguesses",
-        contentType: "application/json;charset=utf-8",
-        type: 'POST',
-        data: JSON.stringify({guesses}),
+        url : "/saveguess",
+        type : "POST",
+        data : { "match_id": matchId,
+                 "goals_1": goals1,
+                 "goals_2": goals2 },
         dataType: "json",
         success: function(data) {
             if (verbose == true) {
