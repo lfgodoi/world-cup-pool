@@ -34,8 +34,14 @@ def guesses():
 def save_guesses():
     try:
         match_id = int(request.form["match_id"])
-        goals_1 = request.form["goals_1"]
-        goals_2 = request.form["goals_2"]
+        if request.form["goals_1"] != "":
+            goals_1 = int(request.form["goals_1"])
+        else:
+            goals_1 = None
+        if request.form["goals_2"] != "":
+            goals_2 = int(request.form["goals_2"])
+        else:
+            goals_2 = None
         db_access = DBAccess()
         db_access.save_guess(session["active_user"], match_id, goals_1, goals_2)
         message = "Usuário removido com sucesso!"

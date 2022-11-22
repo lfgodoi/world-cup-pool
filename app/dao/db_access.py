@@ -174,8 +174,15 @@ class DBAccess:
                        """, (username,)) 
         result = cursor.fetchone()
         guesses = result[0]
-        updated_guesses = guesses
-        updated_guesses[str(match_id)] = [goals_1, goals_2, 0]
+        if guesses is not None:
+            updated_guesses = guesses
+            updated_guesses[str(match_id)] = [goals_1, goals_2, 0]
+        else:
+            guesses = {}
+            for i in range(48):
+                guesses[str(i + 1)] = [None, None, 0]
+            updated_guesses = guesses
+            updated_guesses[str(match_id)] = [goals_1, goals_2, 0]
         cursor.execute("""
                        UPDATE users SET guesses = %s
                        WHERE username = %s
