@@ -253,6 +253,7 @@ class DBAccess:
             guesses = result[1]
             if guesses is None:
                 total_score = 0
+                exact_guesses = 0
             else:
                 guesses = {int(k): v for k, v in guesses.items()}
                 total_score = 0
