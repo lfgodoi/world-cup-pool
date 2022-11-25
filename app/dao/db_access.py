@@ -100,8 +100,8 @@ class DBAccess:
     def get_users_ranking(self):
         cursor = self.connect() 
         cursor.execute("""
-                    SELECT name, username, score FROM users
-                    ORDER BY score DESC, name ASC
+                    SELECT name, username, score, exact_guesses FROM users
+                    ORDER BY score DESC, exact_guesses DESC, name ASC
                         """)                
         results = cursor.fetchall()
         self.disconnect()
@@ -256,12 +256,15 @@ class DBAccess:
             else:
                 guesses = {int(k): v for k, v in guesses.items()}
                 total_score = 0
+                exact_guesses = 0
                 for match_id in guesses.keys():
                     total_score += guesses[match_id][2]
+                    if guesses[match_id][2] == 5:
+                        exact_guesses += 1
             cursor.execute("""
-                        UPDATE users SET score = %s
-                        WHERE id = %s
-                        """, (total_score, user_id))          
+                           UPDATE users SET score = %s, exact_guesses = %s
+                           WHERE id = %s
+                           """, (total_score, exact_guesses, user_id))          
         self.disconnect()
 
    # Reading guesses from all users for the same match
