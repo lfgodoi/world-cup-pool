@@ -62,7 +62,7 @@
             <tr class="tr-header">
                 <td><h4>Posição</h4></td>
                 <td><h4>Jogador</h4></td>
-                <td><h4>Pontos<br>(placares exatos)</h4></td>
+                <td><h4>Pontos</h4></td>
             </tr>
             {% for user in users %}
                 {% if loop.index %2 == 0 %}
@@ -72,7 +72,7 @@
                 {% endif %}
                         <td class="td-ranking">{{ user["position"] }}</td>
                         <td class="td-ranking">{{ user["name"] }}</td>
-                        <td class="td-ranking">{{ user["score"] }} ({{ user["exact_guesses"] }})</td>
+                        <td class="td-ranking">{{ user["score"] }}</td>
                     </tr>
             {% endfor %}
         </table>
