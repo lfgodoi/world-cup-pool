@@ -121,6 +121,7 @@ class DBAccess:
                 "name": result[0],
                 "username": result[1],
                 "score": result[2],
+                "exact_guesses": result[3],
                 "position": position
             }
             users.append(user)
