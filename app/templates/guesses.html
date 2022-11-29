@@ -79,15 +79,15 @@
                 <tr class="tr-match-result">
                     <td class="td-match col-team" id="col-team-1-{{ match['id'] }}">{{ match["team_1"] }}</td>
                     {% if guesses is none %}
-                        <td class="td-match col-goals"><input class="input-goals goals-1" type="number" min=0 max=20 id="input-goals-1-{{ match['id'] }}" onchange="saveGuesses(this, false)" disabled></td>
+                        <td class="td-match col-goals"><input class="input-goals goals-1" type="number" min=0 max=20 id="input-goals-1-{{ match['id'] }}" onchange="saveGuesses(this, false)" onfocus="this.oldValue = this.value;" disabled></td>
                     {% else %}
-                        <td class="td-match col-goals"><input class="input-goals goals-1" type="number" min=0 max=20 value={{ guesses[match["id"]][0] }} id="input-goals-1-{{ match['id'] }}" onchange="saveGuesses(this, false)" disabled></td>
+                        <td class="td-match col-goals"><input class="input-goals goals-1" type="number" min=0 max=20 value={{ guesses[match["id"]][0] }} id="input-goals-1-{{ match['id'] }}" onchange="saveGuesses(this, false)" onfocus="this.oldValue = this.value;" disabled></td>
                     {% endif %}
                     <td class="td-match col-versus">x</td>
                     {% if guesses is none %}
-                        <td class="td-match col-goals"><input class="input-goals goals-2" type="number" min=0 max=20 id="input-goals-2-{{ match['id'] }}" onchange="saveGuesses(this, false)" disabled></td>
+                        <td class="td-match col-goals"><input class="input-goals goals-2" type="number" min=0 max=20 id="input-goals-2-{{ match['id'] }}" onchange="saveGuesses(this, false)" onfocus="this.oldValue = this.value;" disabled></td>
                     {% else %}
-                        <td class="td-match col-goals"><input class="input-goals goals-2" type="number" min=0 max=20 value={{ guesses[match["id"]][1] }} id="input-goals-2-{{ match['id'] }}" onchange="saveGuesses(this, false)" disabled></td>
+                        <td class="td-match col-goals"><input class="input-goals goals-2" type="number" min=0 max=20 value={{ guesses[match["id"]][1] }} id="input-goals-2-{{ match['id'] }}" onchange="saveGuesses(this, false)" onfocus="this.oldValue = this.value;" disabled></td>
                     {% endif %}
                     <td class="td-match col-team" id="col-team-2-{{ match['id'] }}">{{ match["team_2"] }}</td>
                 </tr>

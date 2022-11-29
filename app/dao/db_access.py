@@ -1,7 +1,7 @@
 # Importando pacotes e módulos
-from nis import match
 import psycopg2
 import json
+import datetime
 
 # Lendo o arquivo de parâmetros
 with open("./dao/config.json", "rb") as file:
@@ -184,9 +184,20 @@ class DBAccess:
             updated_guesses = guesses
             updated_guesses[str(match_id)] = [goals_1, goals_2, 0]
         cursor.execute("""
-                       UPDATE users SET guesses = %s
-                       WHERE username = %s
-                       """, (json.dumps(updated_guesses), username))                
+                       SELECT datetime FROM matches
+                       WHERE id = %s
+                       """, (match_id,))                
+        result = cursor.fetchone()
+        match_datetime = result[0]
+        deadline = match_datetime - datetime.timedelta(hours=1)
+        current_datetime = datetime.datetime.now()
+        if current_datetime >= deadline:
+            raise Exception
+        else:
+            cursor.execute("""
+                           UPDATE users SET guesses = %s
+                           WHERE username = %s
+                           """, (json.dumps(updated_guesses), username))                
         self.disconnect()
 
     # Updating a player

@@ -105,9 +105,13 @@ function saveGuesses(target, verbose) {
             }
         },  
         error: function() {
-            if (verbose == true) {
-                alert("Erro ao salvar palpites! Verifique os campos preenchidos.");
+            if (elementId.includes("input-goals-1")) {
+                document.querySelector("#input-goals-1-" + matchId).value = target.oldValue;
             }
+            else {
+                document.querySelector("#input-goals-2-" + matchId).value = target.oldValue;
+            } 
+            alert("Erro ao salvar palpites! Verifique os campos preenchidos e o horário do jogo.");
         }
     })
 }
