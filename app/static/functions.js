@@ -260,6 +260,7 @@ setInterval(function() {
 $(document).ready(function() {
     var url = window.location.pathname;
     if (url == "/guesses") {
+        alert("Os jogos do mata-mata (a partir do 49) começaram a ser adicionados. Fique atento para não perder os prazos dos novos jogos!")
         checkDatetimes(false);
     }
 })
