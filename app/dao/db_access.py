@@ -183,21 +183,21 @@ class DBAccess:
                 guesses[str(i + 1)] = [None, None, 0]
             updated_guesses = guesses
             updated_guesses[str(match_id)] = [goals_1, goals_2, 0]
+        # cursor.execute("""
+        #                SELECT datetime FROM matches
+        #                WHERE id = %s
+        #                """, (match_id,))                
+        # result = cursor.fetchone()
+        # match_datetime = result[0]
+        # deadline = match_datetime - datetime.timedelta(hours=1)
+        # current_datetime = datetime.datetime.now()
+        # if current_datetime >= deadline:
+        #     raise Exception
+        # else:
         cursor.execute("""
-                       SELECT datetime FROM matches
-                       WHERE id = %s
-                       """, (match_id,))                
-        result = cursor.fetchone()
-        match_datetime = result[0]
-        deadline = match_datetime - datetime.timedelta(hours=1)
-        current_datetime = datetime.datetime.now()
-        if current_datetime >= deadline:
-            raise Exception
-        else:
-            cursor.execute("""
-                           UPDATE users SET guesses = %s
-                           WHERE username = %s
-                           """, (json.dumps(updated_guesses), username))                
+                       UPDATE users SET guesses = %s
+                       WHERE username = %s
+                       """, (json.dumps(updated_guesses), username))                
         self.disconnect()
 
     # Updating a player
