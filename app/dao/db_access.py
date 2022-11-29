@@ -192,6 +192,7 @@ class DBAccess:
         match_datetime = result[0]
         deadline = match_datetime - datetime.timedelta(hours=1)
         current_datetime = datetime.datetime.now(pytz.timezone("America/Sao_Paulo"))
+        current_datetime = current_datetime.replace(tzinfo=None)
         if current_datetime >= deadline:
             raise Exception
         else:
