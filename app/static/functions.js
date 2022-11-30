@@ -260,7 +260,7 @@ setInterval(function() {
 $(document).ready(function() {
     var url = window.location.pathname;
     if (url == "/guesses") {
-        alert("Os jogos do mata-mata (a partir do 49) começaram a ser adicionados. Fique atento para não perder os prazos dos novos jogos!")
+        alert("As partidas de mata-mata (a partir do jogo 49) começaram a ser adicionadas. Só serão considerados os resultados do tempo normal. Prorrogração e pênaltis não serão levados em conta no resultado do bolão.")
         checkDatetimes(false);
     }
 })
