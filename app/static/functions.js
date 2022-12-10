@@ -260,7 +260,7 @@ setInterval(function() {
 $(document).ready(function() {
     var url = window.location.pathname;
     if (url == "/guesses") {
-        alert("As partidas das semifinais (jogos 61 e 62) começaram a ser adicionadas. Só serão considerados os resultados do tempo normal. Prorrogação e pênaltis não serão levados em conta no resultado do bolão.")
+        alert("As partidas das semifinais (jogos 61 e 62) foram adicionadas.")
         checkDatetimes(false);
     }
 })
