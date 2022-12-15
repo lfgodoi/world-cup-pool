@@ -260,7 +260,7 @@ setInterval(function() {
 $(document).ready(function() {
     var url = window.location.pathname;
     if (url == "/guesses") {
-        alert("As partidas das semifinais (jogos 61 e 62) foram adicionadas.")
+        alert("As últimas partidas (jogos 63 e 64) foram adicionadas.")
         checkDatetimes(false);
     }
 })
